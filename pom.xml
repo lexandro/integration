@@ -10,17 +10,17 @@
 
     <groupId>com.lexandro</groupId>
     <artifactId>integration</artifactId>
-
     <version>1.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
     <modules>
         <module>app</module>
     </modules>
 
-    <packaging>pom</packaging>
-
     <properties>
         <!--API-->
         <swagger-springmvc.version>0.9.5</swagger-springmvc.version>
+        <json-path.version>1.2.0</json-path.version>
         <!-- Spring -->
         <spring-cloud.version>1.0.0.RELEASE</spring-cloud.version>
         <spring-plugin-core.version>1.1.0.RELEASE</spring-plugin-core.version>
@@ -29,11 +29,13 @@
         <mockito.version>1.10.8</mockito.version>
         <cucumber.version>1.2.2</cucumber.version>
         <junit.version>4.11</junit.version>
+        <assertj.version>1.7.0</assertj.version>
         <!--general-->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>1.8</java.version>
         <maven-compiler-plugin.version>3.2</maven-compiler-plugin.version>
     </properties>
+
     <dependencyManagement>
         <dependencies>
             <!-- Spring Cloud -->
@@ -96,6 +98,12 @@
                 <groupId>junit</groupId>
                 <artifactId>junit</artifactId>
                 <version>${junit.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.assertj</groupId>
+                <artifactId>assertj-core</artifactId>
+                <version>${assertj.version}</version>
                 <scope>test</scope>
             </dependency>
         </dependencies>
