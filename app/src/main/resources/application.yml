@@ -1,0 +1,51 @@
+spring:
+  # profiles.active: dev
+server:
+    port: 80
+
+management:
+  context-path: /manage
+
+jackson:
+  serialization:
+    indent_output: true
+
+shell:
+ ssh.enabled: false
+
+# expose basic application information via '/manage/info' endpoint
+info:
+  Application: Appdirect Integration App (${project.artifactId})
+  Description: Just a PoC app to check Appdirect API
+  Version: ${project.version} (${git.build.time})
+
+# expose git information via '/manage/env' endpoint
+git:
+  tags: ${git.tags}
+  commit:
+    id:
+      id: ${git.commit.id}
+      describe: ${git.commit.id.describe}
+      abbrev: ${git.commit.id.abbrev}
+    message:
+      full: "${git.commit.message.full}"
+      short: "${git.commit.message.short}"
+    user:
+      name: ${git.commit.user.name}
+      email: ${git.commit.user.email}
+      time: ${git.commit.time}
+  branch: ${git.branch}
+  build:
+    user:
+      name: ${git.build.user.name}
+      email: ${git.build.user.email}
+    time: ${git.build.time}
+  remote:
+    origin:
+      url: ${git.remote.origin.url}
+
+# Spring actuator endpoint config
+#endpoints:
+#  beans:
+#    sensitive: true
+
