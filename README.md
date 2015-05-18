@@ -8,17 +8,15 @@ TBD
 How to build
 ============
 
-TBD
+Building the app
+
+Building the Docker image
 
 Running the app
 ===============
+Normal run
 
-TBD
-
-Docker
-======
-
-TBD
+Docker run
 
 Roadmap
 =======
