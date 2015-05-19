@@ -3,6 +3,7 @@
 Intro
 =====
 
+
 TBD
 
 How to build
@@ -12,6 +13,8 @@ Building the app
 
 Building the Docker image
 
+Lombok
+
 Running the app
 ===============
 Normal run
@@ -20,12 +23,11 @@ Docker run
 
 Roadmap
 =======
-
-- Add: subscriptions
-- Setup: CI
-- Setup: Auto Deploy
+- Add: subscriptions respond with status
 - Add: SSO
-...
 
+Done
+====
+- Add: subscriptions without response
 
 
