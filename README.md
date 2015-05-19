@@ -21,8 +21,11 @@ Docker run
 Roadmap
 =======
 
-- Add: buy
+- Add: subscriptions
+- Setup: CI
+- Setup: Auto Deploy
 - Add: SSO
-TBD.
+...
+
 
 
