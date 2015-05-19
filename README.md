@@ -1,4 +1,4 @@
-# Appdirect integration PoC
+# AppDirect integration PoC
 
 Intro
 =====

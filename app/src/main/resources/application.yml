@@ -18,8 +18,8 @@ shell:
 
 # expose basic application information via '/manage/info' endpoint
 info:
-  Application: Appdirect Integration App (${project.artifactId})
-  Description: Just a PoC app to check Appdirect API
+  Application: AppDirect Integration App (${project.artifactId})
+  Description: Just a PoC app to check AppDirect API
   Version: ${project.version} (${git.build.time})
 
 # expose git information via '/manage/env' endpoint
