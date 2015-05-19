@@ -6,3 +6,4 @@ Feature: AppDirect Subscription API endpoints tests
     Given the app started
     When I call create subscription endpoint
     Then returns status OK
+
