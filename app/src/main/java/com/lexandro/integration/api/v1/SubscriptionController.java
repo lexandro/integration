@@ -4,7 +4,10 @@ import com.wordnik.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import static com.lexandro.integration.api.v1.Version.VERSION;
 
@@ -17,26 +20,26 @@ public class SubscriptionController {
     protected static final String BASE_PATH = "/subscription/" + VERSION;
 
 
-    @RequestMapping("/create")
-    public ResponseEntity create(@RequestParam String eventUrl) {
+    @RequestMapping(value = "/create", method = RequestMethod.GET)
+    public ResponseEntity create(@RequestParam(value = "eventUrl", required = true) String eventUrl) {
         log.info("Create event URL: {}", eventUrl);
         return new ResponseEntity(HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/change/{eventUrl}", method = RequestMethod.GET)
-    public ResponseEntity change(@PathVariable("eventUrl") String eventUrl) {
+    @RequestMapping(value = "/change", method = RequestMethod.GET)
+    public ResponseEntity change(@RequestParam(value = "eventUrl", required = true) String eventUrl) {
         log.info("Change event URL: {}", eventUrl);
         return new ResponseEntity(HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/cancel/{eventUrl}", method = RequestMethod.GET)
-    public ResponseEntity cancel(@PathVariable("eventUrl") String eventUrl) {
+    @RequestMapping(value = "/cancel", method = RequestMethod.GET)
+    public ResponseEntity cancel(@RequestParam(value = "eventUrl", required = true) String eventUrl) {
         log.info("Cancel event URL: {}", eventUrl);
         return new ResponseEntity(HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/status/{eventUrl}", method = RequestMethod.GET)
-    public ResponseEntity status(@PathVariable("eventUrl") String eventUrl) {
+    @RequestMapping(value = "/status", method = RequestMethod.GET)
+    public ResponseEntity status(@RequestParam(value = "eventUrl", required = true) String eventUrl) {
         log.info("Status event URL: {}", eventUrl);
         return new ResponseEntity(HttpStatus.OK);
     }
