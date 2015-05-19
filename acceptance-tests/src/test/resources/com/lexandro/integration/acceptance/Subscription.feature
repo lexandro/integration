@@ -3,7 +3,8 @@ Feature: AppDirect Subscription API endpoints tests
 
 
   Scenario: First
-    Given the app started
-    When I call create subscription endpoint
-    Then returns status OK
+    Given we have a subscription create event
+    When I call create subscription endpoint version 1
+    Then returns ok status
+
 
