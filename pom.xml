@@ -15,6 +15,7 @@
 
     <modules>
         <module>app</module>
+        <module>acceptance-tests</module>
     </modules>
 
     <properties>
@@ -71,16 +72,11 @@
                 <artifactId>flexjson</artifactId>
                 <version>${flexjson.version}</version>
             </dependency>
-            <!--test-->
-            <dependency>
-                <groupId>org.mockito</groupId>
-                <artifactId>mockito-core</artifactId>
-                <version>${mockito.version}</version>
-                <scope>test</scope>
-            </dependency>
+            <!--testing cucumber-->
+            <!--CUCUMBER-->
             <dependency>
                 <groupId>info.cukes</groupId>
-                <artifactId>cucumber-junit</artifactId>
+                <artifactId>cucumber-core</artifactId>
                 <version>${cucumber.version}</version>
                 <scope>test</scope>
             </dependency>
@@ -90,10 +86,26 @@
                 <version>${cucumber.version}</version>
                 <scope>test</scope>
             </dependency>
+
             <dependency>
                 <groupId>info.cukes</groupId>
                 <artifactId>cucumber-spring</artifactId>
                 <version>${cucumber.version}</version>
+                <scope>test</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>info.cukes</groupId>
+                <artifactId>cucumber-junit</artifactId>
+                <version>${cucumber.version}</version>
+                <scope>test</scope>
+            </dependency>
+
+            <!--testing general -->
+            <dependency>
+                <groupId>org.mockito</groupId>
+                <artifactId>mockito-core</artifactId>
+                <version>${mockito.version}</version>
                 <scope>test</scope>
             </dependency>
             <dependency>
