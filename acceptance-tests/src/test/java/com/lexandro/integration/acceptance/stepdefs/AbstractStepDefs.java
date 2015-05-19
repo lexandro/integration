@@ -19,8 +19,6 @@ public class AbstractStepDefs {
 
     @Resource
     protected WebApplicationContext context;
-
-
     //
     @Resource
     protected MockMvc mvc;
