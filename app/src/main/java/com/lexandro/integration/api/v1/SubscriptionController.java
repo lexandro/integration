@@ -4,12 +4,7 @@ import com.wordnik.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.oauth.provider.ConsumerAuthentication;
-import org.springframework.security.web.bind.annotation.AuthenticationPrincipal;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import static com.lexandro.integration.api.v1.Version.VERSION;
 
@@ -22,9 +17,9 @@ public class SubscriptionController {
     protected static final String BASE_PATH = "/subscription/" + VERSION;
 
 
-    @RequestMapping("/create/{eventUrl}")
-    public ResponseEntity create(@PathVariable("eventUrl") String eventUrl, @AuthenticationPrincipal ConsumerAuthentication authentication) {
-        log.info("Create event URL: {}, auth: {}", eventUrl, authentication);
+    @RequestMapping("/create")
+    public ResponseEntity create(@RequestParam String eventUrl) {
+        log.info("Create event URL: {}", eventUrl);
         return new ResponseEntity(HttpStatus.OK);
     }
 

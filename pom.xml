@@ -51,22 +51,6 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
-            <dependency>
-                <groupId>org.springframework.security</groupId>
-                <artifactId>spring-security-web</artifactId>
-                <version>${spring-security-core.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>org.springframework.security</groupId>
-                <artifactId>spring-security-openid</artifactId>
-                <version>4.0.1.RELEASE</version>
-            </dependency>
-            <dependency>
-                <groupId>org.springframework.security.oauth</groupId>
-                <artifactId>spring-security-oauth</artifactId>
-                <version>2.0.3.RELEASE</version>
-            </dependency>
             <!-- other -->
             <dependency>
                 <groupId>com.mangofactory</groupId>
