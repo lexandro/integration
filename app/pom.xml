@@ -114,35 +114,65 @@
         </resources>
         <plugins>
             <plugin>
-                <groupId>pl.project13.maven</groupId>
-                <artifactId>git-commit-id-plugin</artifactId>
-                <version>2.1.12</version>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.10</version>
                 <executions>
                     <execution>
+                        <id>default-test</id>
+                        <phase>test</phase>
                         <goals>
-                            <goal>revision</goal>
+                            <goal>test</goal>
                         </goals>
+                        <configuration>
+                            <skip>true</skip>
+                            <trimStackTrace>false</trimStackTrace>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>unit-tests</id>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>test</goal>
+                        </goals>
+                        <configuration>
+                            <skip>false</skip>
+                            <includes>
+                                <include>**/*Test.java</include>
+                                <include>**/*Steps.java</include>
+                            </includes>
+                            <excludes>
+                                <exclude>**/*IntegrationTest.java</exclude>
+                                <exclude>**/*IntegrationSteps.java</exclude>
+                            </excludes>
+                            <trimStackTrace>false</trimStackTrace>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>integration-tests</id>
+                        <phase>integration-test</phase>
+                        <goals>
+                            <goal>test</goal>
+                        </goals>
+                        <configuration>
+                            <skip>false</skip>
+                            <includes>
+                                <include>**/*IntegrationTest.java</include>
+                                <include>**/*IntegrationSteps.java</include>
+                                <include>**/*FeaturesRunner.java</include>
+                            </includes>
+                            <trimStackTrace>false</trimStackTrace>
+                        </configuration>
                     </execution>
                 </executions>
                 <configuration>
-                    <dateFormat>dd.MM.yyyy '@' HH:mm:ss z</dateFormat>
-                    <generateGitPropertiesFile>false</generateGitPropertiesFile>
-                    <verbose>false</verbose>
-                    <gitDescribe>
-                        <skip>false</skip>
-                        <always>false</always>
-                        <abbrev>7</abbrev>
-                        <dirty>-dirty</dirty>
-                        <forceLongFormat>false</forceLongFormat>
-                    </gitDescribe>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-                <configuration>
-                    <!-- prevent filtered resources being removed from 'target/classes' during 'spring-boot:run' -->
-                    <addResources>false</addResources>
+                    <skip>true</skip>
+                    <trimStackTrace>false</trimStackTrace>
                 </configuration>
             </plugin>
 
@@ -150,7 +180,7 @@
                 <groupId>com.spotify</groupId>
                 <artifactId>docker-maven-plugin</artifactId>
                 <configuration>
-                    <imageName>imaginarium</imageName>
+                    <imageName>lexandro/imaginarium</imageName>
                     <dockerDirectory>docker</dockerDirectory>
                     <resources>
                         <resource>
