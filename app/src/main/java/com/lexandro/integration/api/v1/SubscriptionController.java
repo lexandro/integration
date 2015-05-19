@@ -10,10 +10,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import static com.lexandro.integration.api.v1.Version.VERSION;
-import static org.springframework.http.MediaType.APPLICATION_XML_VALUE;
 
 @RestController("SubscriptionController" + VERSION)
-@RequestMapping(value = SubscriptionController.BASE_PATH, produces = APPLICATION_XML_VALUE)
+@RequestMapping(value = SubscriptionController.BASE_PATH)
 @Api(value = "SubscriptionController-" + VERSION, description = "API gateway for Appdirect's Subscription Management Api")
 @Slf4j
 public class SubscriptionController {
