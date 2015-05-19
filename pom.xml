@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
@@ -38,6 +38,7 @@
         <maven-compiler-plugin.version>3.2</maven-compiler-plugin.version>
         <docker-maven-plugin.version>0.2.8</docker-maven-plugin.version>
         <flexjson.version>3.3</flexjson.version>
+        <spring-security-core.version>3.2.6.RELEASE</spring-security-core.version>
     </properties>
 
     <dependencyManagement>
@@ -49,6 +50,22 @@
                 <version>${spring-cloud.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.security</groupId>
+                <artifactId>spring-security-web</artifactId>
+                <version>${spring-security-core.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.security</groupId>
+                <artifactId>spring-security-openid</artifactId>
+                <version>4.0.1.RELEASE</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.security.oauth</groupId>
+                <artifactId>spring-security-oauth</artifactId>
+                <version>2.0.3.RELEASE</version>
             </dependency>
             <!-- other -->
             <dependency>
@@ -73,7 +90,6 @@
                 <version>${flexjson.version}</version>
             </dependency>
             <!--testing cucumber-->
-            <!--CUCUMBER-->
             <dependency>
                 <groupId>info.cukes</groupId>
                 <artifactId>cucumber-core</artifactId>
@@ -164,4 +180,17 @@
 
         </pluginManagement>
     </build>
+
+    <repositories>
+        <repository>
+            <id>spring-releases</id>
+            <url>https://repo.spring.io/libs-release</url>
+        </repository>
+    </repositories>
+    <pluginRepositories>
+        <pluginRepository>
+            <id>spring-releases</id>
+            <url>https://repo.spring.io/libs-release</url>
+        </pluginRepository>
+    </pluginRepositories>
 </project>
