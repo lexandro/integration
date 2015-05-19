@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 import static com.lexandro.integration.api.v1.Version.VERSION;
 
 @RestController("ImaginariumController" + VERSION)
-@RequestMapping(ImaginariumController.BASE_PATH)
+@RequestMapping(value = ImaginariumController.BASE_PATH)
 @Api(value = "Imaginarium-" + VERSION, description = "Basic API version for Imaginarium")
 public class ImaginariumController {
 
