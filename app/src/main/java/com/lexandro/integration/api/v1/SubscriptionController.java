@@ -28,8 +28,7 @@ public class SubscriptionController {
         //
         EventResponse response = new EventResponse();
         response.setSuccess(true);
-        response.setAccountIdentifier("fakeAcc");
-        response.setMessage("Subscription created");
+        response.setMessage("The application is alive!");
         //
         return new ResponseEntity<EventResponse>(response, HttpStatus.OK);
     }
