@@ -23,7 +23,6 @@
         <swagger-springmvc.version>0.9.5</swagger-springmvc.version>
         <json-path.version>1.2.0</json-path.version>
         <!-- Spring -->
-        <spring-cloud.version>1.0.0.RELEASE</spring-cloud.version>
         <spring-plugin-core.version>1.1.0.RELEASE</spring-plugin-core.version>
         <spring-boot.version>1.2.3.RELEASE</spring-boot.version>
         <!--testing-->
@@ -45,9 +44,9 @@
         <dependencies>
             <!-- Spring Cloud -->
             <dependency>
-                <groupId>org.springframework.cloud</groupId>
-                <artifactId>spring-cloud-starter-parent</artifactId>
-                <version>${spring-cloud.version}</version>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-web</artifactId>
+                <version>${spring-boot.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
