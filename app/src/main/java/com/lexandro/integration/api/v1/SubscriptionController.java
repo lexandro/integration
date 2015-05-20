@@ -1,8 +1,10 @@
 package com.lexandro.integration.api.v1;
 
+import com.lexandro.integration.model.EventResponse;
 import com.wordnik.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -20,10 +22,16 @@ public class SubscriptionController {
     protected static final String BASE_PATH = "/subscription/" + VERSION;
 
 
-    @RequestMapping(value = "/create", method = RequestMethod.GET)
-    public ResponseEntity create(@RequestParam(value = "eventUrl", required = true) String eventUrl) {
-        log.info("Create event URL: {}", eventUrl);
-        return new ResponseEntity(HttpStatus.OK);
+    @RequestMapping(value = "/create", method = RequestMethod.GET, produces = MediaType.APPLICATION_XML_VALUE)
+    public ResponseEntity<EventResponse> create(@RequestParam(value = "eventUrl", required = true) String eventUrl) {
+        log.info("Called create event URL: {}", eventUrl);
+        //
+        EventResponse response = new EventResponse();
+        response.setSuccess(true);
+        response.setAccountIdentifier("fakeAcc");
+        response.setMessage("Subscription created");
+        //
+        return new ResponseEntity<EventResponse>(response, HttpStatus.OK);
     }
 
     @RequestMapping(value = "/change", method = RequestMethod.GET)

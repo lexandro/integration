@@ -8,6 +8,7 @@ import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilde
 
 import static com.lexandro.integration.acceptance.data.CucumberData.resultActions;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 
 @Slf4j
 public class SubscriptionStepDefs extends AbstractStepDefs {
@@ -19,8 +20,11 @@ public class SubscriptionStepDefs extends AbstractStepDefs {
 
     @When("^I call create subscription endpoint version (\\d+)$")
     public void I_call_create_subscription_endpoint(int version) throws Throwable {
-        MockHttpServletRequestBuilder createSubscriptionMessage = get("/subscription/v" + version + "/create/a").contentType(MediaType.APPLICATION_XML);
+        MockHttpServletRequestBuilder createSubscriptionMessage = get("/subscription/v" + version + "/create")
+                .param("eventUrl", "fakeUrl")
+                .contentType(MediaType.APPLICATION_XML);
         resultActions = mvc.perform(createSubscriptionMessage);
+        resultActions.andDo(print());
     }
 
 }
