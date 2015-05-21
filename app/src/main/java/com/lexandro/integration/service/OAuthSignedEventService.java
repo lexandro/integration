@@ -9,6 +9,7 @@ import oauth.signpost.exception.OAuthMessageSignerException;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import javax.xml.bind.JAXBException;
 import java.io.IOException;
 
 @Service
@@ -21,15 +22,21 @@ public class OAuthSignedEventService implements EventService {
     @Resource
     private HttpService httpService;
 
+    @Resource
+    private XmlService xmlService;
+
     @Override
-    public <T extends AbstractEvent> T get(String url, Class<T> resultType) {
+    public <T extends AbstractEvent> T get(String url, Class<T> expectedEventType) {
         log.debug("OAuthSignedEventService get with {}", url);
         try {
             String signedUrl = oAuthConsumer.sign(url);
             log.debug("Signed URL {}", signedUrl);
             String result = httpService.get(signedUrl);
-            log.error("get result {}", result);
-        } catch (OAuthMessageSignerException | OAuthExpectationFailedException | OAuthCommunicationException | IOException e) {
+            log.debug("get result {}", result);
+            T eventObject = xmlService.toObject(result, expectedEventType);
+            log.debug("unmarshalled result {}", eventObject);
+            return eventObject;
+        } catch (OAuthMessageSignerException | OAuthExpectationFailedException | OAuthCommunicationException | IOException | JAXBException e) {
             e.printStackTrace();
         }
         return null;
