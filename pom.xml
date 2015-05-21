@@ -39,6 +39,8 @@
         <maven-compiler-plugin.version>3.2</maven-compiler-plugin.version>
         <docker-maven-plugin.version>0.2.8</docker-maven-plugin.version>
         <flexjson.version>3.3</flexjson.version>
+        <signpost-core.version>1.2.1.2</signpost-core.version>
+        <httpclient.version>4.4</httpclient.version>
     </properties>
 
     <dependencyManagement>
@@ -58,7 +60,7 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
-
+            <!--security-->
             <dependency>
                 <groupId>org.springframework.security.oauth</groupId>
                 <artifactId>spring-security-oauth</artifactId>
@@ -69,7 +71,17 @@
                 <artifactId>spring-security-openid</artifactId>
                 <version>${spring-security-openid.version}</version>
             </dependency>
+            <dependency>
+                <groupId>oauth.signpost</groupId>
+                <artifactId>signpost-core</artifactId>
+                <version>${signpost-core.version}</version>
+            </dependency>
             <!-- other -->
+            <dependency>
+                <groupId>org.apache.httpcomponents</groupId>
+                <artifactId>httpclient</artifactId>
+                <version>${httpclient.version}</version>
+            </dependency>
             <dependency>
                 <groupId>com.mangofactory</groupId>
                 <artifactId>swagger-springmvc</artifactId>

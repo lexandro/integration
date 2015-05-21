@@ -1,6 +1,6 @@
 package com.lexandro.integration.acceptance.config;
 
-import com.lexandro.integration.config.SpringConfig;
+import com.lexandro.integration.config.ApplicationSpringConfig;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -13,7 +13,7 @@ import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandl
 
 import javax.annotation.Resource;
 
-@Import({SpringConfig.class})
+@Import({ApplicationSpringConfig.class})
 @Configuration
 @EnableAutoConfiguration
 @ComponentScan("com.lexandro.integration")
