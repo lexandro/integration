@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import static com.lexandro.integration.api.v1.Version.VERSION;
+import static com.lexandro.integration.api.v1.ApiVersion.VERSION;
 
 @RestController("ImaginariumController" + VERSION)
 @RequestMapping(value = ImaginariumController.BASE_PATH)
