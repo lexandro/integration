@@ -11,4 +11,5 @@ public class Payload {
     // FIXME what is this configuration thingy?
     // private PayloadConfiguration configuration;
     private Order order;
+    private Account account;
 }

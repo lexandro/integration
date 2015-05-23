@@ -3,6 +3,7 @@ package com.lexandro.integration.service;
 import com.lexandro.integration.model.*;
 import com.lexandro.integration.repository.SubscriptionRepository;
 import com.lexandro.integration.service.exception.UserExistsException;
+import com.lexandro.integration.service.exception.UserMissingException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -30,7 +31,8 @@ public class AppDirectSubscriptionService implements SubscriptionService {
                     .id(subscriptionCreateEvent.getCreator().getUuid())
                     .marketplace(subscriptionCreateEvent.getMarketplace())
                     .creator(subscriptionCreateEvent.getCreator())
-                    .payload(subscriptionCreateEvent.getPayload())
+                    .company(subscriptionCreateEvent.getPayload().getCompany())
+                    .order(subscriptionCreateEvent.getPayload().getOrder())
                     .build();
             //
             subscriptionRepository.save(subscription);
@@ -44,7 +46,24 @@ public class AppDirectSubscriptionService implements SubscriptionService {
     @Override
     public Subscription change(SubscriptionChangeEvent subscriptionChangeEvent) {
         log.debug("Subscriptionservice change with {}", subscriptionChangeEvent);
-        return null;
+
+        Subscription subscription = subscriptionRepository.findOne(subscriptionChangeEvent.getCreator().getUuid());
+        //
+        EventResponse result = null;
+
+        if (subscription != null) {
+            // Quite unlikely to change them
+//            subscription.setMarketplace(subscriptionChangeEvent.getMarketplace());
+//            subscription.setCreator(subscriptionChangeEvent.getCreator());
+            subscription.setOrder(subscriptionChangeEvent.getPayload().getOrder());
+            subscription.setAccount(subscriptionChangeEvent.getPayload().getAccount());
+            //
+            subscriptionRepository.save(subscription);
+            return subscription;
+        } else {
+            log.error("Changesubscription - user missing: {}", subscriptionChangeEvent.getCreator());
+            throw new UserMissingException(subscriptionChangeEvent.getCreator().getUuid());
+        }
     }
 
     @Override

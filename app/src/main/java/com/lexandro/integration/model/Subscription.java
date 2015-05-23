@@ -16,14 +16,13 @@ public class Subscription {
 
     @Id
     private String id;
-
-
-    private EventType eventType;
+    //
     private Marketplace marketplace;
-
+    // FIXME do we need to store creator to a subscription data?
     private User creator;
-
-    private Payload payload;
-
+    //
+    private Account account;
+    private Company company;
+    private Order order;
 
 }
