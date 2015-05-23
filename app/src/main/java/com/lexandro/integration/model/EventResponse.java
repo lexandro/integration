@@ -8,7 +8,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 
 @Data
-@XmlRootElement(name = "response")
+@XmlRootElement(name = "result")
 @XmlAccessorType(value = XmlAccessType.FIELD)
 public class EventResponse {
     private String accountIdentifier;
