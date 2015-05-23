@@ -9,7 +9,9 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @Data
 @XmlRootElement
-// FIXME kell?
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Order {
+
+    private String editionCode;
+    private String pricingDuration;
 }

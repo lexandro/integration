@@ -8,8 +8,10 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 public class Company {
     private String uuid;
+    private String country;
     private String name;
     private String phoneNumber;
     private String email;
     private String website;
+
 }

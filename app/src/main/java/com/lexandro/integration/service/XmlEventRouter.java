@@ -23,7 +23,9 @@ public class XmlEventRouter implements EventRouter {
     @Override
     public EventResponse routeEvent(String eventUrl) {
         String rawEvent = eventService.get(eventUrl);
-
+        EventResponse result = new EventResponse();
+        result.setSuccess(true);
+        //
         try {
             // speed optimized solution, to avoid double xml parsing
             if (rawEvent.contains("SUBSCRIPTION_ORDER")) {
@@ -31,8 +33,7 @@ public class XmlEventRouter implements EventRouter {
                 subscriptionService.create(subscriptionEvent);
             }
         } catch (JAXBException e) {
-            // FIXME better catch handling
-            e.printStackTrace();
+            // FIXME
         }
         return null;
     }

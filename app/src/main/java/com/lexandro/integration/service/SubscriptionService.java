@@ -1,16 +1,14 @@
 package com.lexandro.integration.service;
 
-import com.lexandro.integration.model.EventResponse;
-import com.lexandro.integration.model.Subscription;
-import com.lexandro.integration.model.SubscriptionCreateEvent;
+import com.lexandro.integration.model.*;
 
 public interface SubscriptionService {
 
     Subscription create(SubscriptionCreateEvent subscriptionCreateEvent);
 
-    EventResponse change(String eventUrl);
+    Subscription change(SubscriptionChangeEvent subscriptionChangeEvent);
 
-    EventResponse cancel(String eventUrl);
+    Subscription cancel(SubscriptionCancelEvent subscriptionCancelEvent);
 
-    EventResponse status(String eventUrl);
+    Subscription status(SubscriptionNoticeEvent subscriptionNoticeEvent);
 }

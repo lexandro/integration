@@ -1,8 +1,6 @@
 package com.lexandro.integration.service;
 
-import com.lexandro.integration.model.EventResponse;
-import com.lexandro.integration.model.Subscription;
-import com.lexandro.integration.model.SubscriptionCreateEvent;
+import com.lexandro.integration.model.*;
 import com.lexandro.integration.repository.SubscriptionRepository;
 import com.lexandro.integration.service.exception.UserExistsException;
 import lombok.extern.slf4j.Slf4j;
@@ -43,17 +41,19 @@ public class AppDirectSubscriptionService implements SubscriptionService {
     }
 
     @Override
-    public EventResponse change(String eventUrl) {
+    public Subscription change(SubscriptionChangeEvent subscriptionChangeEvent) {
         return null;
     }
 
     @Override
-    public EventResponse cancel(String eventUrl) {
+    public Subscription cancel(SubscriptionCancelEvent subscriptionCancelEvent) {
         return null;
     }
 
     @Override
-    public EventResponse status(String eventUrl) {
+    public Subscription status(SubscriptionNoticeEvent subscriptionNoticeEvent) {
         return null;
     }
+
+
 }
