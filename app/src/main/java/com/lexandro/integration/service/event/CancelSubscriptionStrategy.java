@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import javax.xml.bind.JAXBException;
 
-@Service("CancelSubscriptionStrategy")
+@Service
 @Slf4j
 public class CancelSubscriptionStrategy implements EventProcessorStrategy {
 
