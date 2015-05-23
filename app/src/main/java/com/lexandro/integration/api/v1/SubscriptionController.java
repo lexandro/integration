@@ -42,12 +42,12 @@ public class SubscriptionController {
     }
 
     @RequestMapping(value = "/change", method = GET)
-    public ResponseEntity change(@RequestParam(value = EVENT_URL_PARAM_VALUE) String eventUrl, @RequestParam(value = TOKEN_PARAM_VALUE) String token, @AuthenticationPrincipal ConsumerAuthentication authentication) {
+    public EventResponse change(@RequestParam(value = EVENT_URL_PARAM_VALUE) String eventUrl, @RequestParam(value = TOKEN_PARAM_VALUE) String token, @AuthenticationPrincipal ConsumerAuthentication authentication) {
         log.info("Called change event URL: {}, auth: {}, token: {}", eventUrl, authentication, token);
         //
         EventResponse changeResponse = eventRouter.routeEvent(eventUrl);
         //
-        return new ResponseEntity<>(changeResponse, OK);
+        return changeResponse;
     }
 
     @RequestMapping(value = "/cancel", method = GET)

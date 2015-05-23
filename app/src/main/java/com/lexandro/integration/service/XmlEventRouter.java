@@ -38,6 +38,8 @@ public class XmlEventRouter implements EventRouter {
                 Subscription createdSubcription = subscriptionService.create(subscriptionEvent);
                 result.setAccountIdentifier(createdSubcription.getId());
                 result.setMessage("Subscription created");
+
+                log.info("Subscription created: {}", result);
             }
         } catch (JAXBException e) {
             log.error("Error unmarshalling XML event from eventUrl {} error: {}", eventUrl, e);

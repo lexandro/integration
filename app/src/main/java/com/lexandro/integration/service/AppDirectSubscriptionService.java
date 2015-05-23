@@ -22,6 +22,9 @@ public class AppDirectSubscriptionService implements SubscriptionService {
         Subscription subscription = subscriptionRepository.findOne(subscriptionCreateEvent.getCreator().getUuid());
         //
         EventResponse result = null;
+
+        // FIXME temp avoidance of dup user error! SHOULD REMOVED!
+        subscription = null;
         if (subscription == null) {
             subscription = Subscription.builder()
                     .id(subscriptionCreateEvent.getCreator().getUuid())
@@ -36,12 +39,11 @@ public class AppDirectSubscriptionService implements SubscriptionService {
             log.error("CreateSubscription - user exists: {}", subscription);
             throw new UserExistsException(subscription);
         }
-
-
     }
 
     @Override
     public Subscription change(SubscriptionChangeEvent subscriptionChangeEvent) {
+        log.debug("Subscriptionservice change with {}", subscriptionChangeEvent);
         return null;
     }
 
