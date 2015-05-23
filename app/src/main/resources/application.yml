@@ -12,7 +12,7 @@ appdirect:
 spring:
   data:
     mongodb:
-      uri: mongodb://developer:TheDeveloper2015@ds039311.mongolab.com:39311/imaginarium
+      uri: ${MONGO_URI}
 
 jackson:
   serialization:

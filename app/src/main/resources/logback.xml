@@ -15,5 +15,6 @@
 
     <logger name="ch.qos" level="WARN"/>
     <logger name="com.lexandro.integration" level="DEBUG"/>
+    <logger name="com.lexandro.integration.security.ApplicationOAuthProviderProcessingFilter" level="OFF"/>
 
 </configuration>
