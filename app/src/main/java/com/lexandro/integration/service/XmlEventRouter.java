@@ -35,6 +35,8 @@ public class XmlEventRouter implements EventRouter {
                 createSubscription(rawEvent, result);
             } else if (rawEvent.contains("SUBSCRIPTION_CHANGE")) {
                 changeSubscription(rawEvent, result);
+            } else if (rawEvent.contains("SUBSCRIPTION_CANCEL")) {
+                cancelSubscription(rawEvent, result);
             }
         } catch (JAXBException e) {
             log.error("Error unmarshalling XML event from eventUrl {} error: {}", eventUrl, e);
@@ -50,7 +52,6 @@ public class XmlEventRouter implements EventRouter {
             result.setMessage("User missing");
             result.setErrorCode(ErrorCode.ACCOUNT_NOT_FOUND);
         }
-
         return result;
     }
 
@@ -73,4 +74,15 @@ public class XmlEventRouter implements EventRouter {
 
         log.info("Subscription changed: {}", result);
     }
+
+    private void cancelSubscription(String rawEvent, EventResponse result) throws JAXBException {
+        SubscriptionCancelEvent subscriptionEvent = xmlService.toObject(rawEvent, SubscriptionCancelEvent.class);
+        Subscription changedSubscription = subscriptionService.cancel(subscriptionEvent);
+        //
+        result.setAccountIdentifier(changedSubscription.getId());
+        result.setMessage("Subscription cancelled");
+
+        log.info("Subscription cancelled: {}", result);
+    }
+
 }

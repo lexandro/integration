@@ -61,14 +61,28 @@ public class AppDirectSubscriptionService implements SubscriptionService {
             subscriptionRepository.save(subscription);
             return subscription;
         } else {
-            log.error("Changesubscription - user missing: {}", subscriptionChangeEvent.getCreator());
+            log.error("ChangeSubscription - user missing: {}", subscriptionChangeEvent.getCreator());
             throw new UserMissingException(subscriptionChangeEvent.getCreator().getUuid());
         }
     }
 
     @Override
     public Subscription cancel(SubscriptionCancelEvent subscriptionCancelEvent) {
-        return null;
+        log.debug("Subscriptionservice cancel with {}", subscriptionCancelEvent);
+
+        Subscription subscription = subscriptionRepository.findOne(subscriptionCancelEvent.getCreator().getUuid());
+        //
+        EventResponse result = null;
+
+        if (subscription != null) {
+            //
+            subscriptionRepository.delete(subscription.getId());
+            return subscription;
+        } else {
+            log.error("CancelSubscription - user missing: {}", subscriptionCancelEvent.getCreator());
+            throw new UserMissingException(subscriptionCancelEvent.getCreator().getUuid());
+        }
+
     }
 
     @Override
