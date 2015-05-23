@@ -3,7 +3,6 @@ package com.lexandro.integration.model;
 
 import lombok.Data;
 
-import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.List;
 
@@ -19,6 +18,6 @@ public class User {
 
     private String openId;
     private String uuid;
-    @XmlElement(name = "item")
-    private List<AttributeEntry> userAttributes;
+
+    private List<AttributeEntry> attributes;
 }
