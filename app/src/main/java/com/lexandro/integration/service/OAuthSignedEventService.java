@@ -32,7 +32,7 @@ public class OAuthSignedEventService implements EventService {
             String signedUrl = oAuthConsumer.sign(url);
             log.debug("Signed URL {}", signedUrl);
             String result = httpService.get(signedUrl);
-            log.debug("Get result {}", result);
+            log.debug("Get result: {}", result);
             T eventObject = xmlService.toObject(result, expectedEventType);
             log.debug("Unmarshalled result {}", eventObject);
             return eventObject;
