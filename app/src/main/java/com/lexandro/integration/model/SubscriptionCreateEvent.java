@@ -11,7 +11,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class SubscriptionCreateEvent extends AbstractEvent {
 
     private final EventType eventType = EventType.SUBSCRIPTION_ORDER;
-    private User creator;
     private Payload payload;
 
 }

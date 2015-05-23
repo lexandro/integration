@@ -11,7 +11,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class SubscriptionCancelEvent extends AbstractEvent {
 
     private final EventType eventType = EventType.SUBSCRIPTION_CANCEL;
-    private User creator;
     private Payload payload;
 
 }
