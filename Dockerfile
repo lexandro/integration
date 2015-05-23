@@ -4,7 +4,7 @@ MAINTAINER Robert Stern <lexandro2000 gmail com>
 
 RUN mkdir /app
 
-COPY imaginarium.jar app/imaginarium.jar
+COPY app/target/imaginarium.jar /app/imaginarium.jar
 
 EXPOSE 8080
 
