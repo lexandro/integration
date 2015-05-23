@@ -27,7 +27,6 @@ public class XmlEventRouter implements EventRouter {
         try {
             // speed optimized solution, to avoid double xml parsing
             if (rawEvent.contains("SUBSCRIPTION_ORDER")) {
-
                 SubscriptionCreateEvent subscriptionEvent = xmlService.toObject(rawEvent, SubscriptionCreateEvent.class);
                 subscriptionService.create(subscriptionEvent);
             }

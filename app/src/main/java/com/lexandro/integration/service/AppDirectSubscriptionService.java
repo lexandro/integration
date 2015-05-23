@@ -4,6 +4,7 @@ import com.lexandro.integration.model.EventResponse;
 import com.lexandro.integration.model.Subscription;
 import com.lexandro.integration.model.SubscriptionCreateEvent;
 import com.lexandro.integration.repository.SubscriptionRepository;
+import com.lexandro.integration.service.exception.UserExistsException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -17,7 +18,7 @@ public class AppDirectSubscriptionService implements SubscriptionService {
     private SubscriptionRepository subscriptionRepository;
 
     @Override
-    public EventResponse create(SubscriptionCreateEvent subscriptionCreateEvent) {
+    public Subscription create(SubscriptionCreateEvent subscriptionCreateEvent) {
         log.debug("Subscriptionservice create with {}", subscriptionCreateEvent);
         //
         Subscription subscription = subscriptionRepository.findOne(subscriptionCreateEvent.getCreator().getUuid());
@@ -32,12 +33,13 @@ public class AppDirectSubscriptionService implements SubscriptionService {
                     .build();
             //
             subscriptionRepository.save(subscription);
+            return subscription;
         } else {
-
+            log.error("CreateSubscription - user exists: {}", subscription);
+            throw new UserExistsException(subscription);
         }
 
 
-        return result;
     }
 
     @Override

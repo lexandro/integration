@@ -9,6 +9,11 @@ appdirect:
     key: imaginarium-24808
     secret: 1mdEQ7wo75yc4YGO
 
+spring:
+  data:
+    mongodb:
+      uri: mongodb://developer:TheDeveloper2015@ds039311.mongolab.com:39311/imaginarium
+
 jackson:
   serialization:
     indent_output: true
@@ -51,4 +56,6 @@ git:
 #endpoints:
 #  beans:
 #    sensitive: true
+
+
 
