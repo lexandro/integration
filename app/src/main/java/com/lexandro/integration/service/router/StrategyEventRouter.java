@@ -38,18 +38,15 @@ public class StrategyEventRouter implements EventRouter {
         String rawEvent = eventService.get(eventUrl);
         EventResponse result = new EventResponse();
         result.setSuccess(true);
-
-
+        //
         Optional<EventProcessorStrategy> eventProcessorStrategy = eventProcessorStrategyProvider.get(rawEvent);
-
-        // consider strategy pattern for routing
         try {
             if (eventProcessorStrategy.isPresent()) {
+                eventProcessorStrategy.get().process(rawEvent);
+            } else {
                 result.setSuccess(false);
                 result.setMessage("Received unknown event");
                 result.setErrorCode(ErrorCode.INVALID_RESPONSE);
-            } else {
-                eventProcessorStrategy.get().process(rawEvent);
             }
 
         } catch (JAXBException e) {
