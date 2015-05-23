@@ -1,13 +1,13 @@
-spring:
-    cloud:
-        config:
-            enabled: false
-  # profiles.active: dev
 server:
     port: 8080
 
 management:
   context-path: /manage
+
+appdirect:
+  consumer:
+    key: imaginarium-24808
+    secret: 1mdEQ7wo75yc4YGO
 
 jackson:
   serialization:
