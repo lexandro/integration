@@ -1,9 +1,9 @@
 package com.lexandro.integration.service.event;
 
 import com.lexandro.integration.model.ApplicationUser;
+import com.lexandro.integration.model.AssignUserEvent;
 import com.lexandro.integration.model.EventResponse;
 import com.lexandro.integration.model.EventType;
-import com.lexandro.integration.model.UnAssignUserEvent;
 import com.lexandro.integration.service.user.UserService;
 import com.lexandro.integration.service.xml.XmlService;
 import lombok.extern.slf4j.Slf4j;
@@ -29,7 +29,7 @@ public class AssignUserStrategy implements EventProcessorStrategy {
 
     @Override
     public EventResponse process(String rawXml) throws JAXBException {
-        UnAssignUserEvent userEvent = xmlService.toObject(rawXml, UnAssignUserEvent.class);
+        AssignUserEvent userEvent = xmlService.toObject(rawXml, AssignUserEvent.class);
         //
         ApplicationUser applicationUser = userService.assign(userEvent);
         //
