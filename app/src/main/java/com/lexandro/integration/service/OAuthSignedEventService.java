@@ -34,7 +34,7 @@ public class OAuthSignedEventService implements EventService {
             String result = httpService.get(signedUrl);
             log.debug("Get result {}", result);
             T eventObject = xmlService.toObject(result, expectedEventType);
-            log.debug("unmarshalled result {}", eventObject);
+            log.debug("Unmarshalled result {}", eventObject);
             return eventObject;
         } catch (OAuthMessageSignerException | OAuthExpectationFailedException | OAuthCommunicationException | IOException | JAXBException e) {
             e.printStackTrace();
