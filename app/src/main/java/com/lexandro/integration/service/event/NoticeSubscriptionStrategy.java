@@ -24,7 +24,7 @@ public class NoticeSubscriptionStrategy implements EventProcessorStrategy {
 
     @Override
     public Boolean apply(String xmlString) {
-        return xmlString.contains(EventType.SUBSCRIPTION_CANCEL.toString());
+        return xmlString.contains(EventType.SUBSCRIPTION_NOTICE.toString());
     }
 
     @Override
