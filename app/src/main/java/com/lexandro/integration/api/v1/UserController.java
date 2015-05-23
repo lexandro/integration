@@ -21,12 +21,12 @@ import static org.springframework.http.MediaType.APPLICATION_XML_VALUE;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
 @RestController("UserController" + VERSION)
-@RequestMapping(value = UserController.BASE_PATH, produces = APPLICATION_XML_VALUE)
+@RequestMapping(value = UserController.BASE_PATH + VERSION, produces = APPLICATION_XML_VALUE)
 @Api(value = "UserController-" + VERSION, description = "API gateway for AppDirect's User Management Api")
 @Slf4j
 public class UserController {
 
-    protected static final String BASE_PATH = "/users/" + VERSION;
+    public static final String BASE_PATH = "/users/";
 
     @Resource
     private EventRouter eventRouter;

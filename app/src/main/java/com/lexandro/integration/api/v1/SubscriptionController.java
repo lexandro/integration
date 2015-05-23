@@ -21,12 +21,12 @@ import static org.springframework.http.MediaType.APPLICATION_XML_VALUE;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
 @RestController("SubscriptionController" + VERSION)
-@RequestMapping(value = SubscriptionController.BASE_PATH, produces = APPLICATION_XML_VALUE)
+@RequestMapping(value = SubscriptionController.BASE_PATH + VERSION, produces = APPLICATION_XML_VALUE)
 @Api(value = "SubscriptionController-" + VERSION, description = "API gateway for AppDirect's Subscription Management Api")
 @Slf4j
 public class SubscriptionController {
 
-    protected static final String BASE_PATH = "/subscriptions/" + VERSION;
+    public static final String BASE_PATH = "/subscriptions/";
 
     @Resource
     private EventRouter eventRouter;

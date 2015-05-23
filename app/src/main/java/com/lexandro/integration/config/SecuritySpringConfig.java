@@ -1,5 +1,7 @@
 package com.lexandro.integration.config;
 
+import com.lexandro.integration.api.v1.SubscriptionController;
+import com.lexandro.integration.api.v1.UserController;
 import com.lexandro.integration.security.ApplicationOAuthProviderProcessingFilter;
 import lombok.extern.slf4j.Slf4j;
 import oauth.signpost.OAuthConsumer;
@@ -50,7 +52,9 @@ public class SecuritySpringConfig extends WebSecurityConfigurerAdapter {
         // Enable endpoints access
         httpSecurity
                 .authorizeRequests()
-                .antMatchers("/subscription/**")
+                .antMatchers(SubscriptionController.BASE_PATH + "**")
+                .permitAll()
+                .antMatchers(UserController.BASE_PATH + "**")
                 .permitAll()
                 .anyRequest()
                 .authenticated();
