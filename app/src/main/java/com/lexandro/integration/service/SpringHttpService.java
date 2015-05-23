@@ -31,7 +31,7 @@ public class SpringHttpService implements HttpService {
             response = client.execute(request);
             //
             String eventXml = EntityUtils.toString(response.getEntity(), DEFAULT_CHARSET);
-            log.debug("Returned eventXml is a {}", eventXml);
+            log.trace("Returned eventXml is a {}", eventXml);
             return eventXml;
         } finally {
             // This trick was found in http://bit.ly/1IS297B
