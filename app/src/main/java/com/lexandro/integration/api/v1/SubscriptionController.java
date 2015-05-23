@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.annotation.Resource;
 
 import static com.lexandro.integration.api.v1.ApiVersion.VERSION;
+import static com.lexandro.integration.api.v1.AppDirectConstants.EVENT_URL_PARAM_VALUE;
+import static com.lexandro.integration.api.v1.AppDirectConstants.TOKEN_PARAM_VALUE;
 import static org.springframework.http.HttpStatus.OK;
 import static org.springframework.http.MediaType.APPLICATION_XML_VALUE;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
@@ -24,9 +26,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.GET;
 @Slf4j
 public class SubscriptionController {
 
-    protected static final String BASE_PATH = "/subscription/" + VERSION;
-    protected static final String EVENT_URL_PARAM_VALUE = "url";
-    protected static final String TOKEN_PARAM_VALUE = "token";
+    protected static final String BASE_PATH = "/subscriptions/" + VERSION;
 
     @Resource
     private EventRouter eventRouter;
