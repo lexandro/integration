@@ -49,6 +49,11 @@
             <groupId>oauth.signpost</groupId>
             <artifactId>signpost-core</artifactId>
         </dependency>
+        <!--logging-->
+        <dependency>
+            <groupId>com.logentries</groupId>
+            <artifactId>logentries-appender</artifactId>
+        </dependency>
         <!--other-->
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>

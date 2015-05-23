@@ -9,8 +9,21 @@
             <Pattern>%date [%thread] %-5level %logger{25} - %msg%n</Pattern>
         </layout>
     </appender>
+
+    <appender name="LE" class="com.logentries.logback.LogentriesAppender">
+        <Debug>False</Debug>
+        <Token>88fe763d-967a-4b66-8e13-39fb757918a8</Token>
+        <Ssl>False</Ssl>
+        <facility>USER</facility>
+        <layout>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </layout>
+    </appender>
+
+
     <root level="WARN">
         <appender-ref ref="console"/>
+        <appender-ref ref="LE"/>
     </root>
 
     <logger name="ch.qos" level="WARN"/>

@@ -83,6 +83,12 @@
                 <artifactId>signpost-core</artifactId>
                 <version>${signpost-core.version}</version>
             </dependency>
+            <!--logging-->
+            <dependency>
+                <groupId>com.logentries</groupId>
+                <artifactId>logentries-appender</artifactId>
+                <version>RELEASE</version>
+            </dependency>
             <!-- other -->
             <dependency>
                 <groupId>org.apache.httpcomponents</groupId>
