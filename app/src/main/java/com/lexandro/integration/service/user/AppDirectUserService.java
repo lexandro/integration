@@ -12,12 +12,16 @@ public class AppDirectUserService implements UserService {
     @Override
     public ApplicationUser assign(AssignUserEvent userEvent) {
         log.info("Assign called {}", userEvent);
-        return null;
+        ApplicationUser result = new ApplicationUser();
+        result.setId("1");
+        return result;
     }
 
     @Override
     public ApplicationUser unAssign(UnAssignUserEvent userEvent) {
         log.info("unAssign called {}", userEvent);
-        return null;
+        ApplicationUser result = new ApplicationUser();
+        result.setId("1");
+        return result;
     }
 }
