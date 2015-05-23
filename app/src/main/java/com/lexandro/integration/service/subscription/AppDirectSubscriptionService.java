@@ -1,4 +1,4 @@
-package com.lexandro.integration.service;
+package com.lexandro.integration.service.subscription;
 
 import com.lexandro.integration.model.*;
 import com.lexandro.integration.repository.SubscriptionRepository;
@@ -75,7 +75,7 @@ public class AppDirectSubscriptionService implements SubscriptionService {
         EventResponse result = null;
 
         if (subscription != null) {
-            //
+            // Picked delete by intention to it keep simple. Other option to "deactivate" the account
             subscriptionRepository.delete(subscription.getId());
             return subscription;
         } else {

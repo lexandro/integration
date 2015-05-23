@@ -1,7 +1,7 @@
 package com.lexandro.integration.api.v1;
 
 import com.lexandro.integration.model.EventResponse;
-import com.lexandro.integration.service.EventRouter;
+import com.lexandro.integration.service.router.EventRouter;
 import com.wordnik.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;

@@ -1,4 +1,4 @@
-package com.lexandro.integration.service;
+package com.lexandro.integration.service.subscription;
 
 import com.lexandro.integration.model.*;
 
