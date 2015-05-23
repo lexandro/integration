@@ -1,7 +1,7 @@
 package com.lexandro.integration.api.v1;
 
 import com.lexandro.integration.model.EventResponse;
-import com.lexandro.integration.service.SubscriptionService;
+import com.lexandro.integration.service.EventRouter;
 import com.wordnik.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -29,19 +29,14 @@ public class SubscriptionController {
     protected static final String TOKEN_PARAM_VALUE = "token";
 
     @Resource
-    private SubscriptionService subscriptionService;
+    private EventRouter eventRouter;
 
 
     @RequestMapping(value = "/create", method = GET)
     public ResponseEntity<EventResponse> create(@RequestParam(value = EVENT_URL_PARAM_VALUE) String eventUrl, @RequestParam(value = TOKEN_PARAM_VALUE) String token, @AuthenticationPrincipal ConsumerAuthentication authentication) {
         log.info("Called create event URL: {}, auth: {}, token: {}", eventUrl, authentication, token);
         //
-        EventResponse createResponse = subscriptionService.create(eventUrl);
-
-        //
-//        EventResponse response = new EventResponse();
-//        response.setSuccess(true);
-//        response.setMessage("The application is alive!");
+        EventResponse createResponse = eventRouter.routeEvent(eventUrl);
         //
         return new ResponseEntity<>(createResponse, OK);
     }
@@ -50,7 +45,7 @@ public class SubscriptionController {
     public ResponseEntity change(@RequestParam(value = EVENT_URL_PARAM_VALUE) String eventUrl, @RequestParam(value = TOKEN_PARAM_VALUE) String token, @AuthenticationPrincipal ConsumerAuthentication authentication) {
         log.info("Called change event URL: {}, auth: {}, token: {}", eventUrl, authentication, token);
         //
-        EventResponse changeResponse = subscriptionService.change(eventUrl);
+        EventResponse changeResponse = eventRouter.routeEvent(eventUrl);
         //
         return new ResponseEntity<>(changeResponse, OK);
     }
@@ -59,7 +54,7 @@ public class SubscriptionController {
     public ResponseEntity cancel(@RequestParam(value = EVENT_URL_PARAM_VALUE) String eventUrl, @RequestParam(value = TOKEN_PARAM_VALUE) String token, @AuthenticationPrincipal ConsumerAuthentication authentication) {
         log.info("Called cancel event URL: {}, auth: {}, token: {}", eventUrl, authentication, token);
         //
-        EventResponse cancelResponse = subscriptionService.cancel(eventUrl);
+        EventResponse cancelResponse = eventRouter.routeEvent(eventUrl);
         //
         return new ResponseEntity<>(cancelResponse, OK);
     }
@@ -68,7 +63,7 @@ public class SubscriptionController {
     public ResponseEntity status(@RequestParam(value = EVENT_URL_PARAM_VALUE) String eventUrl, @RequestParam(value = TOKEN_PARAM_VALUE) String token, @AuthenticationPrincipal ConsumerAuthentication authentication) {
         log.info("Called status event URL: {}, auth: {}, token: {}", eventUrl, authentication, token);
         //
-        EventResponse statusResponse = subscriptionService.status(eventUrl);
+        EventResponse statusResponse = eventRouter.routeEvent(eventUrl);
         //
         return new ResponseEntity<>(statusResponse, OK);
     }

@@ -1,7 +1,9 @@
 package com.lexandro.integration.service;
 
 import com.lexandro.integration.model.EventResponse;
+import com.lexandro.integration.model.Subscription;
 import com.lexandro.integration.model.SubscriptionCreateEvent;
+import com.lexandro.integration.repository.SubscriptionRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -12,13 +14,30 @@ import javax.annotation.Resource;
 public class AppDirectSubscriptionService implements SubscriptionService {
 
     @Resource
-    private EventService eventService;
+    private SubscriptionRepository subscriptionRepository;
 
     @Override
-    public EventResponse create(String eventUrl) {
-        log.debug("Subscriptionservice create with {}", eventUrl);
-        SubscriptionCreateEvent subscriptionCreateEvent = eventService.get(eventUrl, SubscriptionCreateEvent.class);
-        return null;
+    public EventResponse create(SubscriptionCreateEvent subscriptionCreateEvent) {
+        log.debug("Subscriptionservice create with {}", subscriptionCreateEvent);
+        //
+        Subscription subscription = subscriptionRepository.findOne(subscriptionCreateEvent.getCreator().getUuid());
+        //
+        EventResponse result = null;
+        if (subscription == null) {
+            subscription = Subscription.builder()
+                    .id(subscriptionCreateEvent.getCreator().getUuid())
+                    .marketplace(subscriptionCreateEvent.getMarketplace())
+                    .creator(subscriptionCreateEvent.getCreator())
+                    .payload(subscriptionCreateEvent.getPayload())
+                    .build();
+            //
+            subscriptionRepository.save(subscription);
+        } else {
+
+        }
+
+
+        return result;
     }
 
     @Override

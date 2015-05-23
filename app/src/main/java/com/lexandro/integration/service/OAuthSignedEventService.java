@@ -14,6 +14,7 @@ import java.io.IOException;
 
 @Service
 @Slf4j
+// FIXME catch blocks
 public class OAuthSignedEventService implements EventService {
 
     @Resource
@@ -29,14 +30,27 @@ public class OAuthSignedEventService implements EventService {
     public <T extends AbstractEvent> T get(String url, Class<T> expectedEventType) {
         log.debug("OAuthSignedEventService get with {}", url);
         try {
-            String signedUrl = oAuthConsumer.sign(url);
-            log.debug("Signed URL {}", signedUrl);
-            String result = httpService.get(signedUrl);
-            log.debug("Get result: {}", result);
+            String result = get(url);
+            log.debug("Got raw result: {}", result);
+            //
             T eventObject = xmlService.toObject(result, expectedEventType);
             log.debug("Unmarshalled result {}", eventObject);
+            //
             return eventObject;
-        } catch (OAuthMessageSignerException | OAuthExpectationFailedException | OAuthCommunicationException | IOException | JAXBException e) {
+        } catch (JAXBException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    @Override
+    public String get(String url) {
+        log.debug("OAuthSignedEventService get raw data with {}", url);
+        try {
+            String signedUrl = oAuthConsumer.sign(url);
+            log.debug("Signed URL {}", signedUrl);
+            return httpService.get(signedUrl);
+        } catch (OAuthExpectationFailedException | OAuthCommunicationException | OAuthMessageSignerException | IOException e) {
             e.printStackTrace();
         }
         return null;
