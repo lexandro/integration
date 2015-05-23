@@ -77,6 +77,7 @@ public class AppDirectSubscriptionService implements SubscriptionService {
         if (subscription != null) {
             // Picked delete by intention to it keep simple. Other option to "deactivate" the account
             subscriptionRepository.delete(subscription.getId());
+
             return subscription;
         } else {
             log.error("CancelSubscription - user missing: {}", subscriptionCancelEvent.getCreator());
@@ -86,8 +87,25 @@ public class AppDirectSubscriptionService implements SubscriptionService {
     }
 
     @Override
-    public Subscription status(SubscriptionNoticeEvent subscriptionNoticeEvent) {
-        return null;
+    public Subscription notice(SubscriptionNoticeEvent subscriptionNoticeEvent) {
+        log.debug("Subscriptionservice notice with {}", subscriptionNoticeEvent);
+        Subscription subscription = subscriptionRepository.findOne(subscriptionNoticeEvent.getCreator().getUuid());
+        //
+        EventResponse result = null;
+        if (subscription != null) {
+            // Quite unlikely to change them
+//            subscription.setMarketplace(subscriptionChangeEvent.getMarketplace());
+//            subscription.setCreator(subscriptionChangeEvent.getCreator());
+            subscription.setAccount(subscriptionNoticeEvent.getPayload().getAccount());
+            subscription.setNotice(subscriptionNoticeEvent.getPayload().getNotice());
+
+
+            return subscription;
+        } else {
+            log.error("NoticeSubscription - user missing: {}", subscriptionNoticeEvent.getCreator());
+            throw new UserMissingException(subscriptionNoticeEvent.getCreator().getUuid());
+        }
+
     }
 
 

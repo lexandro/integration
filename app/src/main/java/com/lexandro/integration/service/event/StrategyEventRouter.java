@@ -1,12 +1,11 @@
-package com.lexandro.integration.service.router;
+package com.lexandro.integration.service.event;
 
 import com.lexandro.integration.model.ErrorCode;
 import com.lexandro.integration.model.EventResponse;
-import com.lexandro.integration.service.EventService;
-import com.lexandro.integration.service.XmlService;
 import com.lexandro.integration.service.exception.UserExistsException;
 import com.lexandro.integration.service.exception.UserMissingException;
 import com.lexandro.integration.service.subscription.SubscriptionService;
+import com.lexandro.integration.service.xml.XmlService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 

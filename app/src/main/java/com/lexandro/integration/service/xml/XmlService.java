@@ -1,4 +1,4 @@
-package com.lexandro.integration.service;
+package com.lexandro.integration.service.xml;
 
 import javax.xml.bind.JAXBException;
 

@@ -1,7 +1,7 @@
 package com.lexandro.integration.api.v1;
 
 import com.lexandro.integration.model.EventResponse;
-import com.lexandro.integration.service.router.EventRouter;
+import com.lexandro.integration.service.event.EventRouter;
 import com.wordnik.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -59,9 +59,9 @@ public class SubscriptionController {
         return new ResponseEntity<>(cancelResponse, OK);
     }
 
-    @RequestMapping(value = "/status", method = GET)
-    public ResponseEntity status(@RequestParam(value = EVENT_URL_PARAM_VALUE) String eventUrl, @RequestParam(value = TOKEN_PARAM_VALUE) String token, @AuthenticationPrincipal ConsumerAuthentication authentication) {
-        log.info("Called status event URL: {}, auth: {}, token: {}", eventUrl, authentication, token);
+    @RequestMapping(value = "/notice", method = GET)
+    public ResponseEntity notice(@RequestParam(value = EVENT_URL_PARAM_VALUE) String eventUrl, @RequestParam(value = TOKEN_PARAM_VALUE) String token, @AuthenticationPrincipal ConsumerAuthentication authentication) {
+        log.info("Called notice event URL: {}, auth: {}, token: {}", eventUrl, authentication, token);
         //
         EventResponse statusResponse = eventRouter.routeEvent(eventUrl);
         //

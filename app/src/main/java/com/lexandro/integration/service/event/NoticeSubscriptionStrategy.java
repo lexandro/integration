@@ -1,11 +1,11 @@
-package com.lexandro.integration.service.router;
+package com.lexandro.integration.service.event;
 
 import com.lexandro.integration.model.EventResponse;
 import com.lexandro.integration.model.EventType;
 import com.lexandro.integration.model.Subscription;
-import com.lexandro.integration.model.SubscriptionCancelEvent;
-import com.lexandro.integration.service.XmlService;
+import com.lexandro.integration.model.SubscriptionNoticeEvent;
 import com.lexandro.integration.service.subscription.SubscriptionService;
+import com.lexandro.integration.service.xml.XmlService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -29,15 +29,15 @@ public class NoticeSubscriptionStrategy implements EventProcessorStrategy {
 
     @Override
     public EventResponse process(String rawXml) throws JAXBException {
-        SubscriptionCancelEvent subscriptionEvent = xmlService.toObject(rawXml, SubscriptionCancelEvent.class);
-        Subscription changedSubscription = subscriptionService.cancel(subscriptionEvent);
+        SubscriptionNoticeEvent subscriptionEvent = xmlService.toObject(rawXml, SubscriptionNoticeEvent.class);
+        Subscription noticedSubscription = subscriptionService.notice(subscriptionEvent);
         //
         EventResponse result = new EventResponse();
         result.setSuccess(true);
-        result.setAccountIdentifier(changedSubscription.getId());
-        result.setMessage("Subscription cancelled");
+        result.setAccountIdentifier(noticedSubscription.getId());
+        result.setMessage("Subscription status changed");
 
-        log.info("Subscription cancelled: {}", result);
+        log.info("Subscription status changed: {}", result);
         return result;
     }
 }

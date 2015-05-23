@@ -1,6 +1,8 @@
-package com.lexandro.integration.service;
+package com.lexandro.integration.service.event;
 
 import com.lexandro.integration.model.AbstractEvent;
+import com.lexandro.integration.service.HttpService;
+import com.lexandro.integration.service.xml.XmlService;
 import lombok.extern.slf4j.Slf4j;
 import oauth.signpost.OAuthConsumer;
 import oauth.signpost.exception.OAuthCommunicationException;

@@ -24,5 +24,6 @@ public class Subscription {
     private Account account;
     private Company company;
     private Order order;
+    private Notice notice;
 
 }

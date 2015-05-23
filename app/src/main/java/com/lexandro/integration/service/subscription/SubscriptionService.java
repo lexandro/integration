@@ -10,5 +10,5 @@ public interface SubscriptionService {
 
     Subscription cancel(SubscriptionCancelEvent subscriptionCancelEvent);
 
-    Subscription status(SubscriptionNoticeEvent subscriptionNoticeEvent);
+    Subscription notice(SubscriptionNoticeEvent subscriptionNoticeEvent);
 }

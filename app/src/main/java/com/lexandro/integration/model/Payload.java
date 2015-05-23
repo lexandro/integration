@@ -12,4 +12,5 @@ public class Payload {
     // private PayloadConfiguration configuration;
     private Order order;
     private Account account;
+    private Notice notice;
 }

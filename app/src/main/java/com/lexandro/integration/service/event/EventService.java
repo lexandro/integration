@@ -1,4 +1,4 @@
-package com.lexandro.integration.service;
+package com.lexandro.integration.service.event;
 
 import com.lexandro.integration.model.AbstractEvent;
 

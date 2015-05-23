@@ -2,6 +2,7 @@ package com.lexandro.integration.service;
 
 import com.lexandro.integration.model.EventType;
 import com.lexandro.integration.model.SubscriptionCreateEvent;
+import com.lexandro.integration.service.xml.JaxbXmlService;
 import org.junit.Before;
 import org.junit.Test;
 

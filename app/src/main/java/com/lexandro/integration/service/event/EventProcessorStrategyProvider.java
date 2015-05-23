@@ -1,4 +1,4 @@
-package com.lexandro.integration.service.router;
+package com.lexandro.integration.service.event;
 
 import java.util.Optional;
 
