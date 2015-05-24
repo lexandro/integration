@@ -86,7 +86,8 @@ public class AppDirectSubscriptionService implements SubscriptionService {
     @Override
     public Subscription notice(SubscriptionNoticeEvent subscriptionNoticeEvent) {
         log.debug("Subscriptionservice notice with {}", subscriptionNoticeEvent);
-        Subscription subscription = subscriptionRepository.findByAccountId(subscriptionNoticeEvent.getPayload().getAccount().getAccountIdentifier());
+        String accountIdentifier = subscriptionNoticeEvent.getPayload().getAccount().getAccountIdentifier();
+        Subscription subscription = subscriptionRepository.findByAccountId(accountIdentifier);
         //
         if (subscription != null) {
             // Quite unlikely to change them
@@ -97,8 +98,8 @@ public class AppDirectSubscriptionService implements SubscriptionService {
             subscription.setNotice(subscriptionNoticeEvent.getPayload().getNotice());
             return subscription;
         } else {
-            log.error("NoticeSubscription - user missing: {}", subscriptionNoticeEvent.getCreator());
-            throw new AccountMissingException(subscriptionNoticeEvent.getCreator().getUuid());
+            log.error("NoticeSubscription - account missing: {}", subscriptionNoticeEvent);
+            throw new AccountMissingException(accountIdentifier);
         }
 
     }
