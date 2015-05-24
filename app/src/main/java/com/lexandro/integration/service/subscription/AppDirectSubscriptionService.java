@@ -2,8 +2,8 @@ package com.lexandro.integration.service.subscription;
 
 import com.lexandro.integration.model.*;
 import com.lexandro.integration.repository.SubscriptionRepository;
+import com.lexandro.integration.service.exception.AccountMissingException;
 import com.lexandro.integration.service.exception.UserExistsException;
-import com.lexandro.integration.service.exception.UserMissingException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -20,7 +20,8 @@ public class AppDirectSubscriptionService implements SubscriptionService {
     public Subscription create(SubscriptionCreateEvent subscriptionCreateEvent) {
         log.debug("Subscriptionservice create with {}", subscriptionCreateEvent);
         //
-        Subscription subscription = subscriptionRepository.findByAccountId(subscriptionCreateEvent.getCreator().getUuid());
+        String accountIdCandidate = subscriptionCreateEvent.getCreator().getUuid();
+        Subscription subscription = subscriptionRepository.findByAccountId(accountIdCandidate);
         //
         // FIXME temp avoidance of dup user error! SHOULD REMOVED!
         subscription = null;
@@ -36,8 +37,8 @@ public class AppDirectSubscriptionService implements SubscriptionService {
             subscriptionRepository.save(subscription);
             return subscription;
         } else {
-            log.error("CreateSubscription - user exists: {}", subscription);
-            throw new UserExistsException(subscription);
+            log.error("CreateSubscription - subscription exists with following UUID: {}", subscription);
+            throw new UserExistsException(accountIdCandidate);
         }
     }
 
@@ -45,7 +46,8 @@ public class AppDirectSubscriptionService implements SubscriptionService {
     public Subscription change(SubscriptionChangeEvent subscriptionChangeEvent) {
         log.debug("Subscriptionservice change with {}", subscriptionChangeEvent);
 
-        Subscription subscription = subscriptionRepository.findByAccountId(subscriptionChangeEvent.getPayload().getAccount().getAccountIdentifier());
+        String accountIdentifier = subscriptionChangeEvent.getPayload().getAccount().getAccountIdentifier();
+        Subscription subscription = subscriptionRepository.findByAccountId(accountIdentifier);
         //
         if (subscription != null) {
             // Quite unlikely to change them
@@ -57,8 +59,8 @@ public class AppDirectSubscriptionService implements SubscriptionService {
             subscriptionRepository.save(subscription);
             return subscription;
         } else {
-            log.error("ChangeSubscription - user missing: {}", subscriptionChangeEvent.getCreator());
-            throw new UserMissingException(subscriptionChangeEvent.getCreator().getUuid());
+            log.error("ChangeSubscription - account missing: {}", subscriptionChangeEvent.getCreator());
+            throw new AccountMissingException(accountIdentifier);
         }
     }
 
@@ -66,7 +68,8 @@ public class AppDirectSubscriptionService implements SubscriptionService {
     public Subscription cancel(SubscriptionCancelEvent subscriptionCancelEvent) {
         log.debug("Subscriptionservice cancel with {}", subscriptionCancelEvent);
 
-        Subscription subscription = subscriptionRepository.findOne(subscriptionCancelEvent.getCreator().getUuid());
+        String accountIdentifier = subscriptionCancelEvent.getPayload().getAccount().getAccountIdentifier();
+        Subscription subscription = subscriptionRepository.findByAccountId(accountIdentifier);
         //
         if (subscription != null) {
             // Picked delete by intention to it keep simple. Other option to "deactivate" the account
@@ -74,8 +77,8 @@ public class AppDirectSubscriptionService implements SubscriptionService {
 
             return subscription;
         } else {
-            log.error("CancelSubscription - user missing: {}", subscriptionCancelEvent.getCreator());
-            throw new UserMissingException(subscriptionCancelEvent.getCreator().getUuid());
+            log.error("CancelSubscription - account missing: {}", subscriptionCancelEvent.getCreator());
+            throw new AccountMissingException(accountIdentifier);
         }
 
     }
@@ -95,7 +98,7 @@ public class AppDirectSubscriptionService implements SubscriptionService {
             return subscription;
         } else {
             log.error("NoticeSubscription - user missing: {}", subscriptionNoticeEvent.getCreator());
-            throw new UserMissingException(subscriptionNoticeEvent.getCreator().getUuid());
+            throw new AccountMissingException(subscriptionNoticeEvent.getCreator().getUuid());
         }
 
     }

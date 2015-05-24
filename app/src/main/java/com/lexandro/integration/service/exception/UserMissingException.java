@@ -1,8 +1,8 @@
 package com.lexandro.integration.service.exception;
 
-public class UserMissingException extends RuntimeException {
+public class UserMissingException extends ImaginariumException {
 
     public UserMissingException(String id) {
-        super(String.format("Subscription can't be loaded with Id: %s", id));
+        super(String.format("User missing  with Id: %s", id));
     }
 }

@@ -3,6 +3,7 @@ package com.lexandro.integration.service.event;
 import com.lexandro.integration.model.ErrorCode;
 import com.lexandro.integration.model.EventResponse;
 import com.lexandro.integration.service.event.strategy.EventProcessorStrategy;
+import com.lexandro.integration.service.exception.AccountMissingException;
 import com.lexandro.integration.service.exception.UserExistsException;
 import com.lexandro.integration.service.exception.UserMissingException;
 import com.lexandro.integration.service.subscription.SubscriptionService;
@@ -48,7 +49,6 @@ public class StrategyEventRouter implements EventRouter {
                 result.setMessage("Received unknown event");
                 result.setErrorCode(ErrorCode.INVALID_RESPONSE);
             }
-
         } catch (JAXBException e) {
             log.error("Error unmarshalling XML event from eventUrl {} error: {}", eventUrl, e);
             result.setSuccess(false);
@@ -61,6 +61,10 @@ public class StrategyEventRouter implements EventRouter {
         } catch (UserMissingException uee) {
             result.setSuccess(false);
             result.setMessage("User missing");
+            result.setErrorCode(ErrorCode.USER_NOT_FOUND);
+        } catch (AccountMissingException uee) {
+            result.setSuccess(false);
+            result.setMessage("Account missing");
             result.setErrorCode(ErrorCode.ACCOUNT_NOT_FOUND);
         }
         return result;
