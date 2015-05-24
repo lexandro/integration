@@ -20,15 +20,13 @@ public class AppDirectSubscriptionService implements SubscriptionService {
     public Subscription create(SubscriptionCreateEvent subscriptionCreateEvent) {
         log.debug("Subscriptionservice create with {}", subscriptionCreateEvent);
         //
-        Subscription subscription = subscriptionRepository.findOne(subscriptionCreateEvent.getCreator().getUuid());
+        Subscription subscription = subscriptionRepository.findByAccountId(subscriptionCreateEvent.getCreator().getUuid());
         //
-        EventResponse result = null;
-
         // FIXME temp avoidance of dup user error! SHOULD REMOVED!
         subscription = null;
         if (subscription == null) {
             subscription = Subscription.builder()
-                    .id(subscriptionCreateEvent.getCreator().getUuid())
+                    .accountId(subscriptionCreateEvent.getPayload().getCompany().getUuid())
                     .marketplace(subscriptionCreateEvent.getMarketplace())
                     .creator(subscriptionCreateEvent.getCreator())
                     .company(subscriptionCreateEvent.getPayload().getCompany())
@@ -47,10 +45,8 @@ public class AppDirectSubscriptionService implements SubscriptionService {
     public Subscription change(SubscriptionChangeEvent subscriptionChangeEvent) {
         log.debug("Subscriptionservice change with {}", subscriptionChangeEvent);
 
-        Subscription subscription = subscriptionRepository.findOne(subscriptionChangeEvent.getCreator().getUuid());
+        Subscription subscription = subscriptionRepository.findByAccountId(subscriptionChangeEvent.getPayload().getAccount().getAccountIdentifier());
         //
-        EventResponse result = null;
-
         if (subscription != null) {
             // Quite unlikely to change them
 //            subscription.setMarketplace(subscriptionChangeEvent.getMarketplace());
@@ -72,8 +68,6 @@ public class AppDirectSubscriptionService implements SubscriptionService {
 
         Subscription subscription = subscriptionRepository.findOne(subscriptionCancelEvent.getCreator().getUuid());
         //
-        EventResponse result = null;
-
         if (subscription != null) {
             // Picked delete by intention to it keep simple. Other option to "deactivate" the account
             subscriptionRepository.delete(subscription.getId());
@@ -89,17 +83,15 @@ public class AppDirectSubscriptionService implements SubscriptionService {
     @Override
     public Subscription notice(SubscriptionNoticeEvent subscriptionNoticeEvent) {
         log.debug("Subscriptionservice notice with {}", subscriptionNoticeEvent);
-        Subscription subscription = subscriptionRepository.findOne(subscriptionNoticeEvent.getCreator().getUuid());
+        Subscription subscription = subscriptionRepository.findByAccountId(subscriptionNoticeEvent.getPayload().getAccount().getAccountIdentifier());
         //
-        EventResponse result = null;
         if (subscription != null) {
             // Quite unlikely to change them
 //            subscription.setMarketplace(subscriptionChangeEvent.getMarketplace());
 //            subscription.setCreator(subscriptionChangeEvent.getCreator());
+            // Notice is about to handle the global subscription status of the app, but I simplified to save the last notice
             subscription.setAccount(subscriptionNoticeEvent.getPayload().getAccount());
             subscription.setNotice(subscriptionNoticeEvent.getPayload().getNotice());
-
-
             return subscription;
         } else {
             log.error("NoticeSubscription - user missing: {}", subscriptionNoticeEvent.getCreator());

@@ -1,12 +1,9 @@
 package com.lexandro.integration.model;
 
-import lombok.Data;
-
 import javax.xml.bind.annotation.XmlRootElement;
 
-@Data
 @XmlRootElement
-public class Notice {
+public enum Notice {
 
-    private String type;
+    DEACTIVATED, REACTIVATED, CLOSED, UPCOMING_INVOICE
 }
