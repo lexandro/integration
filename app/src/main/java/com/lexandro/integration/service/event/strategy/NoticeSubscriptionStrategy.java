@@ -1,9 +1,9 @@
-package com.lexandro.integration.service.event;
+package com.lexandro.integration.service.event.strategy;
 
 import com.lexandro.integration.model.EventResponse;
 import com.lexandro.integration.model.EventType;
 import com.lexandro.integration.model.Subscription;
-import com.lexandro.integration.model.SubscriptionChangeEvent;
+import com.lexandro.integration.model.SubscriptionNoticeEvent;
 import com.lexandro.integration.service.subscription.SubscriptionService;
 import com.lexandro.integration.service.xml.XmlService;
 import lombok.extern.slf4j.Slf4j;
@@ -14,7 +14,7 @@ import javax.xml.bind.JAXBException;
 
 @Service
 @Slf4j
-public class ChangeSubscriptionStrategy implements EventProcessorStrategy {
+public class NoticeSubscriptionStrategy implements EventProcessorStrategy {
 
     @Resource
     private XmlService xmlService;
@@ -24,20 +24,20 @@ public class ChangeSubscriptionStrategy implements EventProcessorStrategy {
 
     @Override
     public Boolean apply(String xmlString) {
-        return xmlString.contains(EventType.SUBSCRIPTION_CHANGE.toString());
+        return xmlString.contains(EventType.SUBSCRIPTION_NOTICE.toString());
     }
 
     @Override
     public EventResponse process(String rawXml) throws JAXBException {
-        SubscriptionChangeEvent subscriptionEvent = xmlService.toObject(rawXml, SubscriptionChangeEvent.class);
-        Subscription changedSubscription = subscriptionService.change(subscriptionEvent);
+        SubscriptionNoticeEvent subscriptionEvent = xmlService.toObject(rawXml, SubscriptionNoticeEvent.class);
+        Subscription noticedSubscription = subscriptionService.notice(subscriptionEvent);
         //
         EventResponse result = new EventResponse();
         result.setSuccess(true);
-        result.setAccountIdentifier(changedSubscription.getId());
-        result.setMessage("Subscription changed");
+        result.setAccountIdentifier(noticedSubscription.getAccountId());
+        result.setMessage("Subscription status changed");
 
-        log.info("Subscription changed: {}", result);
+        log.info("Subscription status changed: {}", result);
         return result;
     }
 }

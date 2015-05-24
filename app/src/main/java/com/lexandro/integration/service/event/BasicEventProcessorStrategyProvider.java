@@ -1,6 +1,7 @@
 package com.lexandro.integration.service.event;
 
 
+import com.lexandro.integration.service.event.strategy.EventProcessorStrategy;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

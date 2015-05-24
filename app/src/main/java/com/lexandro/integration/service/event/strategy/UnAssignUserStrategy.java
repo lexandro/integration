@@ -1,9 +1,9 @@
-package com.lexandro.integration.service.event;
+package com.lexandro.integration.service.event.strategy;
 
 import com.lexandro.integration.model.ApplicationUser;
-import com.lexandro.integration.model.AssignUserEvent;
 import com.lexandro.integration.model.EventResponse;
 import com.lexandro.integration.model.EventType;
+import com.lexandro.integration.model.UnAssignUserEvent;
 import com.lexandro.integration.service.user.UserService;
 import com.lexandro.integration.service.xml.XmlService;
 import lombok.extern.slf4j.Slf4j;
@@ -14,7 +14,7 @@ import javax.xml.bind.JAXBException;
 
 @Service
 @Slf4j
-public class AssignUserStrategy implements EventProcessorStrategy {
+public class UnAssignUserStrategy implements EventProcessorStrategy {
 
     @Resource
     private XmlService xmlService;
@@ -24,21 +24,21 @@ public class AssignUserStrategy implements EventProcessorStrategy {
 
     @Override
     public Boolean apply(String xmlString) {
-        return xmlString.contains(EventType.USER_ASSIGNMENT.toString());
+        return xmlString.contains(EventType.USER_UNASSIGNMENT.toString());
     }
 
     @Override
     public EventResponse process(String rawXml) throws JAXBException {
-        AssignUserEvent userEvent = xmlService.toObject(rawXml, AssignUserEvent.class);
+        UnAssignUserEvent userEvent = xmlService.toObject(rawXml, UnAssignUserEvent.class);
         //
-        ApplicationUser applicationUser = userService.assign(userEvent);
+        ApplicationUser applicationUser = userService.unAssign(userEvent);
         //
         EventResponse result = new EventResponse();
         result.setSuccess(true);
         result.setAccountIdentifier(applicationUser.getId());
-        result.setMessage("User assigned");
+        result.setMessage("User unassigned");
         //
-        log.info("User assigned: {}", result);
+        log.info("User unassigned: {}", result);
         return result;
     }
 }

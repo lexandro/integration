@@ -1,4 +1,4 @@
-package com.lexandro.integration.service.event;
+package com.lexandro.integration.service.event.strategy;
 
 import com.lexandro.integration.model.EventResponse;
 

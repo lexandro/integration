@@ -1,9 +1,9 @@
-package com.lexandro.integration.service.event;
+package com.lexandro.integration.service.event.strategy;
 
 import com.lexandro.integration.model.EventResponse;
 import com.lexandro.integration.model.EventType;
 import com.lexandro.integration.model.Subscription;
-import com.lexandro.integration.model.SubscriptionNoticeEvent;
+import com.lexandro.integration.model.SubscriptionCreateEvent;
 import com.lexandro.integration.service.subscription.SubscriptionService;
 import com.lexandro.integration.service.xml.XmlService;
 import lombok.extern.slf4j.Slf4j;
@@ -14,7 +14,7 @@ import javax.xml.bind.JAXBException;
 
 @Service
 @Slf4j
-public class NoticeSubscriptionStrategy implements EventProcessorStrategy {
+public class CreateSubscriptionStrategy implements EventProcessorStrategy {
 
     @Resource
     private XmlService xmlService;
@@ -24,20 +24,21 @@ public class NoticeSubscriptionStrategy implements EventProcessorStrategy {
 
     @Override
     public Boolean apply(String xmlString) {
-        return xmlString.contains(EventType.SUBSCRIPTION_NOTICE.toString());
+        return xmlString.contains(EventType.SUBSCRIPTION_ORDER.toString());
     }
 
     @Override
     public EventResponse process(String rawXml) throws JAXBException {
-        SubscriptionNoticeEvent subscriptionEvent = xmlService.toObject(rawXml, SubscriptionNoticeEvent.class);
-        Subscription noticedSubscription = subscriptionService.notice(subscriptionEvent);
+        SubscriptionCreateEvent subscriptionEvent = xmlService.toObject(rawXml, SubscriptionCreateEvent.class);
+        //
+        Subscription createdSubscription = subscriptionService.create(subscriptionEvent);
         //
         EventResponse result = new EventResponse();
         result.setSuccess(true);
-        result.setAccountIdentifier(noticedSubscription.getId());
-        result.setMessage("Subscription status changed");
-
-        log.info("Subscription status changed: {}", result);
+        result.setAccountIdentifier(createdSubscription.getAccountId());
+        result.setMessage("Subscription created");
+        //
+        log.info("Subscription created: {}", result);
         return result;
     }
 }

@@ -1,4 +1,4 @@
-package com.lexandro.integration.service.event;
+package com.lexandro.integration.service.event.strategy;
 
 import com.lexandro.integration.model.EventResponse;
 import com.lexandro.integration.model.EventType;
@@ -34,7 +34,7 @@ public class CancelSubscriptionStrategy implements EventProcessorStrategy {
         //
         EventResponse result = new EventResponse();
         result.setSuccess(true);
-        result.setAccountIdentifier(chancelledSubscription.getId());
+        result.setAccountIdentifier(chancelledSubscription.getAccountId());
         result.setMessage("Subscription cancelled");
 
         log.info("Subscription cancelled: {}", result);

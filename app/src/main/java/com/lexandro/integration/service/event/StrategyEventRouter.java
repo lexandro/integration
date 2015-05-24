@@ -2,6 +2,7 @@ package com.lexandro.integration.service.event;
 
 import com.lexandro.integration.model.ErrorCode;
 import com.lexandro.integration.model.EventResponse;
+import com.lexandro.integration.service.event.strategy.EventProcessorStrategy;
 import com.lexandro.integration.service.exception.UserExistsException;
 import com.lexandro.integration.service.exception.UserMissingException;
 import com.lexandro.integration.service.subscription.SubscriptionService;
