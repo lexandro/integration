@@ -19,8 +19,15 @@ public class AppDirectSubscriptionService implements SubscriptionService {
     @Override
     public Subscription create(SubscriptionCreateEvent subscriptionCreateEvent) {
         log.debug("Subscriptionservice create with {}", subscriptionCreateEvent);
-        //
-        String accountIdCandidate = subscriptionCreateEvent.getCreator().getUuid();
+        
+        // Handling dummy calls
+        String accountIdCandidate;
+        if (subscriptionCreateEvent.getReturnUrl().contains("token=dummyOrder")) {
+            accountIdCandidate = "dummy-account";
+        } else {
+            accountIdCandidate = subscriptionCreateEvent.getCreator().getUuid();
+        }
+
         Subscription subscription = subscriptionRepository.findByAccountId(accountIdCandidate);
         //
         // FIXME temp avoidance of dup user error! SHOULD REMOVED!
