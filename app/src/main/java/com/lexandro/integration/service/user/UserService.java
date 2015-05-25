@@ -1,11 +1,11 @@
 package com.lexandro.integration.service.user;
 
-import com.lexandro.integration.model.ApplicationUser;
-import com.lexandro.integration.model.AssignUserEvent;
-import com.lexandro.integration.model.UnAssignUserEvent;
+import com.lexandro.integration.model.*;
 
 public interface UserService {
     ApplicationUser assign(AssignUserEvent userEvent);
+
+    ApplicationUser assign(Account account, User user);
 
     ApplicationUser unAssign(UnAssignUserEvent userEvent);
 }

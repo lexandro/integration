@@ -35,10 +35,15 @@ could be found here:
 
 https://github.com/lexandro/integration-bootstrap
 
-
-
-
-
+## Integration endpoints
+Subscription
+    Create: http://imaginarium.lexandro.com/subscriptions/v1/create/?url={eventUrl}&token={token}
+    Change: http://imaginarium.lexandro.com/subscriptions/v1/change/?url={eventUrl}&token={token}
+    Cancel: http://imaginarium.lexandro.com/subscriptions/v1/cancel/?url={eventUrl}&token={token}
+    Notice: http://imaginarium.lexandro.com/subscriptions/v1/notice/?url={eventUrl}&token={token}
+User management:    
+    Assign:   http://imaginarium.lexandro.com/users/v1/assign/?url={eventUrl}&token={token}
+    Unassign: http://imaginarium.lexandro.com/users/v1/unassign/?url={eventUrl}&token={token}
 
 ## Running the app
 ===============

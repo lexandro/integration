@@ -28,18 +28,21 @@ public class AppDirectUserService implements UserService {
         log.info("Assign called {}", userEvent);
         //
         Payload payload = userEvent.getPayload();
+        return assign(payload.getAccount(), payload.getUser());
+    }
 
-        String accountIdentifier = payload.getAccount().getAccountIdentifier();
+    @Override
+    public ApplicationUser assign(Account account, User user) {
+        String accountIdentifier = account.getAccountIdentifier();
         checkSubscription(accountIdentifier);
         //
-        String userId = payload.getUser().getOpenId();
+        String userId = user.getOpenId();
         ApplicationUser appUser = applicationUserRepository.findByAccountIdAndOpenId(accountIdentifier, userId);
         if (appUser == null) {
             //
-            User user = payload.getUser();
             appUser = ApplicationUser
                     .builder()
-                    .accountId(payload.getAccount().getAccountIdentifier())
+                    .accountId(accountIdentifier)
                     .openId(user.getOpenId())
                     .firstName(user.getFirstName())
                     .lastName(user.getLastName())
