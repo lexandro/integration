@@ -3,12 +3,12 @@
 <head lang="en">
     <meta charset="UTF-8"/>
     <title>Welcome in the Imaginarium...</title>
-    <link rel='stylesheet' href='/static/bootstrap/css/bootstrap.css'/>
+    <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css'/>
+
 </head>
 <body>
 <nav class="navbar navbar-default">
     <div class="container-fluid">
-        <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                 <span class="sr-only">Toggle navigation</span>
@@ -19,13 +19,11 @@
             <a class="navbar-brand" href="#">Imaginarium</a>
         </div>
 
-        <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
                 <li><a href="https://github.com/lexandro/integration-bootstrap">Delivery Pipeline@Github</a></li>
                 <li><a href="https://github.com/lexandro/integration">Imaginarium@Github</a></li>
-                <li><a href="http://ci.lexandro.com/">Jenkins status</a></li>
+                <li class="active"><a href="http://ci.lexandro.com/">Jenkins status</a></li>
 
             </ul>
             <ul class="nav navbar-nav navbar-right">
@@ -35,13 +33,11 @@
         </div>
     </div>
 </nav>
-<div class="jumbotron">
-    <h1>Welcome in the Imaginarium</h1>
+<h1>Welcome in the Imaginarium</h1>
 
-    <p>This is simple data listing page from the MongoDB backend</p>
-    <!--<p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a></p>-->
-</div>
-
+<h1>
+    <small>This is simple data listing page from the MongoDB backend</small>
+</h1>
 <div class="col-md-12>">
     <div class="col-md-6">
         <div class="panel panel-primary">
@@ -107,7 +103,7 @@
     <div class="col-md-6">
         <div class="panel panel-primary">
             <div class="panel-heading">
-                <h4 class="panel-title"><span class="glyphicon glyphicon-user"></span> User details</h4>
+                <h4 class="panel-title"><span class="glyphicon glyphicon-cog"></span> User details</h4>
             </div>
             <table class="table table-condensed table-hover table-striped table-bordered">
                 <thead>
@@ -154,7 +150,7 @@
     <div class="col-md-6">
         <div class="panel panel-primary">
             <div class="panel-heading">
-                <h4 class="panel-title"><span class="glyphicon glyphicon-home"></span> Assigned users</h4>
+                <h4 class="panel-title"><span class="glyphicon glyphicon-user"></span> Assigned users</h4>
             </div>
             <table class="table table-condensed table-hover table-striped table-bordered">
                 <thead>
@@ -188,7 +184,7 @@
         </div>
     </div>
 </div>
-<script src="/static/jquery/jquery.js"></script>
-<script src="/static/bootstrap/js/bootstrap.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 </body>
 </html>
