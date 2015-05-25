@@ -19,9 +19,11 @@ public class AppDirectSubscriptionService implements SubscriptionService {
     @Override
     public Subscription create(SubscriptionCreateEvent subscriptionCreateEvent) {
         log.debug("Subscriptionservice create with {}", subscriptionCreateEvent);
-        
+
         // Handling dummy calls
         String accountIdCandidate;
+        log.debug("Subscriptionservice generate account for {}", subscriptionCreateEvent.getReturnUrl());
+
         if (subscriptionCreateEvent.getReturnUrl().contains("token=dummyOrder")) {
             accountIdCandidate = "dummy-account";
         } else {
