@@ -6,7 +6,7 @@ Sample app to demonstrate AppDirect integration by Robert Stern based on Java 8,
 
 
 ## How to build
-Prerequisites: The application needs to be built with Maven 3.0.4++, Java 8 and uses Lombok to generate setter/getters etc. Please have a look on https://projectlombok.org/ to see how is your IDE supported.  
+Prerequisites: The application needs to be built with Maven 3.0.4++, Java 8, MongoDB and uses Lombok to generate setter/getters etc. Please have a look on https://projectlombok.org/ to see how is your IDE supported.  
 
 To build:
 ```
@@ -21,7 +21,13 @@ Building the Docker image
      
 ## Deploy/run
 
-Java app is available on localhost:8080 and the passed security settings is mandatory for some virtualized environment, otherwise the startup takes 30 mins o.O
+Java app is available on localhost:8080 and the passed security settings is mandatory for some virtualized environment, otherwise the startup takes 30 mins o.O.
+To run the app you could configure your MongoDB access or use the following I generated for reviewers (that differs from my dev instance):
+
+  mongodb://appdirect:Test-2015@ds027698.mongolab.com:27698/imaginarium-dev
+
+FIXME
+
 ```
     java -DMONGO_URI=<mongodb connection string> -Djava.security.egd=file:/dev/urandom -jar imaginarium.jar
 ```

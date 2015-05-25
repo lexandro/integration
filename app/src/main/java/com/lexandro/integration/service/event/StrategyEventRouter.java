@@ -39,7 +39,7 @@ public class StrategyEventRouter implements EventRouter {
         Optional<EventProcessorStrategy> eventProcessorStrategy = eventProcessorStrategyProvider.get(rawEvent);
         try {
             if (eventProcessorStrategy.isPresent()) {
-                eventProcessorStrategy.get().process(rawEvent);
+                result = eventProcessorStrategy.get().process(rawEvent);
             } else {
                 result.setSuccess(false);
                 result.setMessage("Received unknown event");
