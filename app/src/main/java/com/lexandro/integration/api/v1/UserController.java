@@ -23,7 +23,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
 
 /*
-  Receiving user assing/unassign events
+  Receiving user assign/unassign events
  */
 @RestController("UserController" + VERSION)
 @RequestMapping(value = UserController.BASE_PATH + VERSION, produces = APPLICATION_XML_VALUE)
