@@ -11,7 +11,8 @@ appdirect:
 
 spring:
   thymeleaf:
-  cache: false
+    enabled: true
+    cache: false
   data:
     mongodb:
       uri: ${MONGO_URI}
