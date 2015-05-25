@@ -2,6 +2,7 @@ package com.lexandro.integration.service.event;
 
 import com.lexandro.integration.model.ErrorCode;
 import com.lexandro.integration.model.EventResponse;
+import com.lexandro.integration.model.logging.EventLog;
 import com.lexandro.integration.repository.EventLoggingRepository;
 import com.lexandro.integration.service.event.strategy.EventProcessorStrategy;
 import com.lexandro.integration.service.exception.AccountMissingException;
@@ -30,8 +31,7 @@ public class StrategyEventRouter implements EventRouter {
     @Override
     public EventResponse routeEvent(String eventUrl) {
         String rawEvent = eventService.get(eventUrl);
-        // Add logging
-        eventLoggingRepository.save(rawEvent);
+        storeEvent(eventUrl, rawEvent);
         //
         EventResponse result = new EventResponse();
         result.setSuccess(true);
@@ -65,6 +65,16 @@ public class StrategyEventRouter implements EventRouter {
         }
         log.info("Returning result {}", result);
         return result;
+    }
+
+    private void storeEvent(String eventUrl, String rawEvent) {
+        // Add logging
+        EventLog eventLog = EventLog.builder()
+                .url(eventUrl)
+                .xml(rawEvent)
+                .build();
+        eventLog.setXml(rawEvent);
+        eventLoggingRepository.save(eventLog);
     }
 
 }
