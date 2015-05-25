@@ -34,8 +34,14 @@ public class AppDirectSubscriptionService implements SubscriptionService {
         // FIXME temp avoidance of dup user error! SHOULD REMOVED!
         subscription = null;
         if (subscription == null) {
+            // Setting account active
+            Account account = new Account();
+            account.setAccountIdentifier(accountIdCandidate);
+            account.setStatus(AccountStatus.ACTIVE);
+            //
             subscription = Subscription.builder()
                     .accountId(accountIdCandidate)
+                    .account(account)
                     .marketplace(subscriptionCreateEvent.getMarketplace())
                     .creator(subscriptionCreateEvent.getCreator())
                     .company(subscriptionCreateEvent.getPayload().getCompany())
