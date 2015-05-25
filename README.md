@@ -23,7 +23,8 @@ Building the Docker image
 The maven packaged app jar could be started directly, but also available as Docker image to run it without any preparation
 
 ### Preparation
-Java app is available on localhost:8080 and the passed security settings is mandatory for some virtualized environment, otherwise the startup takes 30 mins o.O.
+Java app is available on localhost:8080 and the passed **java.security.egd** settings is mandatory for some virtualized environment (e.g. Digital Ocean), otherwise the startup takes 30 mins o.O.
+
 To run the app you could configure your MongoDB access or use the following I generated for reviewers (that differs from my dev instance):
 ```
   mongodb://appdirect:Test-2015@ds027698.mongolab.com:27698/imaginarium-dev
@@ -45,12 +46,12 @@ Pipeline screenshot:
     java -DMONGO_URI=<mongodb connection string> -Djava.security.egd=file:/dev/urandom -jar imaginarium.jar
 ```
 
-Docker image exposes the app on port 80 and you just need to pull it from the public hub:
+Docker image exposes the app port 8080 internally and you just need to pull it from the public hub and assign port 80 to the exposed one:
 ```
     docker pull lexandro/imaginarium // optional
     docker run -dt --name 'imaginarium' -e MONGO_URI=<mongodb connection string> -p 80:8080 lexandro/imaginarium java -Djava.security.egd=file:/dev/urandom -jar imaginarium.jar
 ```     
-Here's the app screenshot
+Here's the app's screenshot
 
 ![alt tag](https://raw.githubusercontent.com/lexandro/integration/master/docs/app_screenshot.png)
 

@@ -24,7 +24,7 @@ public class ChangeSubscriptionStrategy implements EventProcessorStrategy {
 
     @Override
     public Boolean apply(String xmlString) {
-        return xmlString.contains(EventType.SUBSCRIPTION_CHANGE.toString());
+        return xmlString != null && xmlString.contains(EventType.SUBSCRIPTION_CHANGE.toString());
     }
 
     @Override

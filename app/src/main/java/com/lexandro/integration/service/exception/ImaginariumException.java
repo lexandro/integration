@@ -7,4 +7,8 @@ public class ImaginariumException extends RuntimeException {
         super(message);
     }
 
+    public ImaginariumException(String message, Throwable e) {
+        super(message, e);
+    }
+
 }

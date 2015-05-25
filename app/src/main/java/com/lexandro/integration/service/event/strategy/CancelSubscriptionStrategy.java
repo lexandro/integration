@@ -24,17 +24,17 @@ public class CancelSubscriptionStrategy implements EventProcessorStrategy {
 
     @Override
     public Boolean apply(String xmlString) {
-        return xmlString.contains(EventType.SUBSCRIPTION_CANCEL.toString());
+        return xmlString != null && xmlString.contains(EventType.SUBSCRIPTION_CANCEL.toString());
     }
 
     @Override
     public EventResponse process(String rawXml) throws JAXBException {
         SubscriptionCancelEvent subscriptionEvent = xmlService.toObject(rawXml, SubscriptionCancelEvent.class);
-        Subscription chancelledSubscription = subscriptionService.cancel(subscriptionEvent);
+        Subscription cancelledSubscription = subscriptionService.cancel(subscriptionEvent);
         //
         EventResponse result = new EventResponse();
         result.setSuccess(true);
-        result.setAccountIdentifier(chancelledSubscription.getAccountId());
+        result.setAccountIdentifier(cancelledSubscription.getAccountId());
         result.setMessage("Subscription cancelled");
 
         log.info("Subscription cancelled: {}", result);

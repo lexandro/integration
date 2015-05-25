@@ -24,7 +24,7 @@ public class UnAssignUserStrategy implements EventProcessorStrategy {
 
     @Override
     public Boolean apply(String xmlString) {
-        return xmlString.contains(EventType.USER_UNASSIGNMENT.toString());
+        return xmlString != null && xmlString.contains(EventType.USER_UNASSIGNMENT.toString());
     }
 
     @Override

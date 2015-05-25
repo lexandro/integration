@@ -24,7 +24,7 @@ public class AssignUserStrategy implements EventProcessorStrategy {
 
     @Override
     public Boolean apply(String xmlString) {
-        return xmlString.contains(EventType.USER_ASSIGNMENT.toString());
+        return xmlString != null && xmlString.contains(EventType.USER_ASSIGNMENT.toString());
     }
 
     @Override

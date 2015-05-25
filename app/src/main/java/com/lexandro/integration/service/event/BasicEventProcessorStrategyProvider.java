@@ -17,9 +17,13 @@ public class BasicEventProcessorStrategyProvider implements EventProcessorStrate
 
     @Override
     public Optional<EventProcessorStrategy> get(String rawXml) {
-        return eventProcessorStrategyList
-                .stream()
-                .filter(strategy -> strategy.apply(rawXml))
-                .findFirst();
+        if (eventProcessorStrategyList != null) {
+            return eventProcessorStrategyList
+                    .stream()
+                    .filter(strategy -> strategy.apply(rawXml))
+                    .findFirst();
+        } else {
+            return Optional.empty();
+        }
     }
 }

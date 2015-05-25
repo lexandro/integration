@@ -24,7 +24,7 @@ public class CreateSubscriptionStrategy implements EventProcessorStrategy {
 
     @Override
     public Boolean apply(String xmlString) {
-        return xmlString.contains(EventType.SUBSCRIPTION_ORDER.toString());
+        return xmlString != null && xmlString.contains(EventType.SUBSCRIPTION_ORDER.toString());
     }
 
     @Override

@@ -5,11 +5,10 @@ import com.lexandro.integration.model.EventResponse;
 import com.lexandro.integration.model.logging.EventLog;
 import com.lexandro.integration.repository.EventLoggingRepository;
 import com.lexandro.integration.service.event.strategy.EventProcessorStrategy;
-import com.lexandro.integration.service.exception.AccountMissingException;
-import com.lexandro.integration.service.exception.UserExistsException;
-import com.lexandro.integration.service.exception.UserMissingException;
+import com.lexandro.integration.service.exception.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.util.Assert;
 
 import javax.annotation.Resource;
 import javax.xml.bind.JAXBException;
@@ -30,11 +29,26 @@ public class StrategyEventRouter implements EventRouter {
 
     @Override
     public EventResponse routeEvent(String eventUrl) {
-        String rawEvent = eventService.get(eventUrl);
-        storeEvent(eventUrl, rawEvent);
-        //
         EventResponse result = new EventResponse();
         result.setSuccess(true);
+        //
+        String rawEvent = null;
+        try {
+            rawEvent = eventService.get(eventUrl);
+            storeEvent(eventUrl, rawEvent);
+        } catch (EventUnmarshallingException e) {
+            result.setSuccess(false);
+            result.setMessage("Can't understand Event XML");
+            result.setErrorCode(ErrorCode.INVALID_RESPONSE);
+            return result;
+        } catch (EventReadingException e) {
+            result.setSuccess(false);
+            result.setMessage("Cant read event unknown event");
+            result.setErrorCode(ErrorCode.UNKNOWN_ERROR);
+            return result;
+        }
+        //
+        Assert.hasText(rawEvent);
         //
         Optional<EventProcessorStrategy> eventProcessorStrategy = eventProcessorStrategyProvider.get(rawEvent);
         try {

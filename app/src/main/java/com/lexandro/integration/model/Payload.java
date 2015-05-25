@@ -8,7 +8,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement(name = "payload")
 public class Payload {
     private Company company;
-    // FIXME what is this configuration thingy?
+    // FIXME what is this configuration thingy? It was always empty. Could be extended later if necessary
     // private PayloadConfiguration configuration;
     private Order order;
     private Account account;

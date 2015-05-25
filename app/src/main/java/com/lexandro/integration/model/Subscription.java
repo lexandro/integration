@@ -22,7 +22,6 @@ public class Subscription {
     private String accountId;
     //
     private Marketplace marketplace;
-    // FIXME do we need to store creator to a subscription data?
     private User creator;
     //
     private Account account;

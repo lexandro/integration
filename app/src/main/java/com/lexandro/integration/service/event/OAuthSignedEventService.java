@@ -2,6 +2,8 @@ package com.lexandro.integration.service.event;
 
 import com.lexandro.integration.model.AbstractEvent;
 import com.lexandro.integration.service.HttpService;
+import com.lexandro.integration.service.exception.EventReadingException;
+import com.lexandro.integration.service.exception.EventUnmarshallingException;
 import com.lexandro.integration.service.xml.XmlService;
 import lombok.extern.slf4j.Slf4j;
 import oauth.signpost.OAuthConsumer;
@@ -31,8 +33,9 @@ public class OAuthSignedEventService implements EventService {
     @Override
     public <T extends AbstractEvent> T get(String url, Class<T> expectedEventType) {
         log.debug("OAuthSignedEventService get with {}", url);
+        String result = "";
         try {
-            String result = get(url);
+            result = get(url);
             log.debug("Got raw result: {}", result);
             //
             T eventObject = xmlService.toObject(result, expectedEventType);
@@ -40,9 +43,8 @@ public class OAuthSignedEventService implements EventService {
             //
             return eventObject;
         } catch (JAXBException e) {
-            e.printStackTrace();
+            throw new EventUnmarshallingException("Error unmarshalling eventObject from: " + result, e);
         }
-        return null;
     }
 
     @Override
@@ -53,8 +55,7 @@ public class OAuthSignedEventService implements EventService {
             log.debug("Signed URL {}", signedUrl);
             return httpService.get(signedUrl);
         } catch (OAuthExpectationFailedException | OAuthCommunicationException | OAuthMessageSignerException | IOException e) {
-            e.printStackTrace();
+            throw new EventReadingException("Error reading event from: " + url, e);
         }
-        return null;
     }
 }
