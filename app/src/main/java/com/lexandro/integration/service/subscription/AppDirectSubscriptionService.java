@@ -110,6 +110,7 @@ public class AppDirectSubscriptionService implements SubscriptionService {
             // Notice is about to handle the global subscription status of the app, but I simplified to save the last notice
             subscription.setAccount(subscriptionNoticeEvent.getPayload().getAccount());
             subscription.setNotice(subscriptionNoticeEvent.getPayload().getNotice());
+            subscription = subscriptionRepository.save(subscription);
             return subscription;
         } else {
             log.error("NoticeSubscription - account missing: {}", subscriptionNoticeEvent);
