@@ -69,7 +69,7 @@ public class SecuritySpringConfig extends WebSecurityConfigurerAdapter {
                 .openidLogin()
                 .authenticationUserDetailsService(authenticationUserDetailsService)
                 .loginProcessingUrl("/login")
-                .loginPage("/loginApplicationOAuthProviderProcessingFilte")
+                .loginPage("/loginpage")
                 .defaultSuccessUrl("/main");
 
         //
