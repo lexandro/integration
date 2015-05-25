@@ -45,7 +45,7 @@ Docker image exposes the app on port 80 and you just need to pull it from the pu
 ## Delivery pipeline
 The app has a fully automated build pipeline on: http://ci.lexandro.com/
 
-![alt tag](https://github.com/lexandro/integration/docs/delivery_pipeline.png)
+![alt tag](https://raw.githubusercontent.com/lexandro/integration/master/docs/delivery_pipeline.png)
 
 
 At the moment the sonar step is demonstrational to show how the automated code quality check could be integrated into the process. The pipeline is
