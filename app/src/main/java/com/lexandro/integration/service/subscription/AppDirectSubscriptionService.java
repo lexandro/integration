@@ -13,6 +13,7 @@ import javax.annotation.Resource;
 @Slf4j
 public class AppDirectSubscriptionService implements SubscriptionService {
 
+    public static final String DUMMY_TOKEN_PATTERN = "token=dummyOrder";
     @Resource
     private SubscriptionRepository subscriptionRepository;
 
@@ -23,10 +24,11 @@ public class AppDirectSubscriptionService implements SubscriptionService {
         // Handling dummy calls
         String accountIdCandidate;
         log.debug("Subscriptionservice generate account for {}", subscriptionCreateEvent.getReturnUrl());
-        if (subscriptionCreateEvent.getReturnUrl().contains("token=dummyOrder")) {
-            accountIdCandidate = "dummy-account";
-        } else {
+        String returnUrl = subscriptionCreateEvent.getReturnUrl();
+        if (returnUrl == null || !returnUrl.contains(DUMMY_TOKEN_PATTERN)) {
             accountIdCandidate = subscriptionCreateEvent.getCreator().getUuid();
+        } else {
+            accountIdCandidate = "dummy-account";
         }
 
         Subscription subscription = subscriptionRepository.findByAccountId(accountIdCandidate);
