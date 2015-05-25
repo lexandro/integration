@@ -23,7 +23,6 @@ public class AppDirectSubscriptionService implements SubscriptionService {
         // Handling dummy calls
         String accountIdCandidate;
         log.debug("Subscriptionservice generate account for {}", subscriptionCreateEvent.getReturnUrl());
-
         if (subscriptionCreateEvent.getReturnUrl().contains("token=dummyOrder")) {
             accountIdCandidate = "dummy-account";
         } else {
@@ -36,7 +35,7 @@ public class AppDirectSubscriptionService implements SubscriptionService {
         subscription = null;
         if (subscription == null) {
             subscription = Subscription.builder()
-                    .accountId(subscriptionCreateEvent.getPayload().getCompany().getUuid())
+                    .accountId(accountIdCandidate)
                     .marketplace(subscriptionCreateEvent.getMarketplace())
                     .creator(subscriptionCreateEvent.getCreator())
                     .company(subscriptionCreateEvent.getPayload().getCompany())
