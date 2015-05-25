@@ -28,6 +28,7 @@
 
     <logger name="ch.qos" level="WARN"/>
     <logger name="com.lexandro.integration" level="DEBUG"/>
+    <logger name="com.lexandro.integration.service.event.OAuthSignedEventService" level="ERROR"/>
     <logger name="com.lexandro.integration.security.ApplicationOAuthProviderProcessingFilter" level="OFF"/>
 
 </configuration>

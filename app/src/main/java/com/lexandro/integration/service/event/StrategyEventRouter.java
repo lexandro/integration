@@ -63,6 +63,7 @@ public class StrategyEventRouter implements EventRouter {
             result.setMessage("Account missing");
             result.setErrorCode(ErrorCode.ACCOUNT_NOT_FOUND);
         }
+        log.info("Returning result {}", result);
         return result;
     }
 
