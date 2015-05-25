@@ -8,4 +8,6 @@ public interface UserService {
     ApplicationUser assign(Account account, User user);
 
     ApplicationUser unAssign(UnAssignUserEvent userEvent);
+
+    void unAssignAll(String accountIdentifier);
 }

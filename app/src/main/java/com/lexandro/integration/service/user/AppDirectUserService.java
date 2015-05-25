@@ -78,6 +78,13 @@ public class AppDirectUserService implements UserService {
         return appUser;
     }
 
+    @Override
+    public void unAssignAll(String accountIdentifier) {
+        log.info("unAssign all users for {}", accountIdentifier);
+        //
+        applicationUserRepository.deleteByAccountId(accountIdentifier);
+    }
+
     private void checkSubscription(String accountIdentifier) {
         Subscription subscription = subscriptionRepository.findByAccountId(accountIdentifier);
         // are we subscribing to an existing subscription?

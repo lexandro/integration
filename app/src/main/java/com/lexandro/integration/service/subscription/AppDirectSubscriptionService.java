@@ -91,6 +91,8 @@ public class AppDirectSubscriptionService implements SubscriptionService {
         Subscription subscription = subscriptionRepository.findByAccountId(accountIdentifier);
         //
         if (subscription != null) {
+            // purge users first
+            userService.unAssignAll(accountIdentifier);
             // Picked delete by intention to it keep simple. Other option to "deactivate" the account
             subscriptionRepository.delete(subscription.getId());
 

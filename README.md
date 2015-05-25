@@ -21,13 +21,16 @@ Building the Docker image
      
 ## Deploy/run
 
+### Preparation
 Java app is available on localhost:8080 and the passed security settings is mandatory for some virtualized environment, otherwise the startup takes 30 mins o.O.
 To run the app you could configure your MongoDB access or use the following I generated for reviewers (that differs from my dev instance):
 
   mongodb://appdirect:Test-2015@ds027698.mongolab.com:27698/imaginarium-dev
 
-FIXME
+### Credentials 
+The consumer key and secret is already provided in <proj root>/app/src/main/resources/application.yml 
 
+### Run
 ```
     java -DMONGO_URI=<mongodb connection string> -Djava.security.egd=file:/dev/urandom -jar imaginarium.jar
 ```
@@ -57,9 +60,5 @@ User management:
     Assign:   http://imaginarium.lexandro.com/users/v1/assign/?url={eventUrl}&token={token}
     Unassign: http://imaginarium.lexandro.com/users/v1/unassign/?url={eventUrl}&token={token}
 
-## Running the app
-===============
-Normal run
 
-Docker run
 
