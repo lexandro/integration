@@ -4,6 +4,7 @@ import com.lexandro.integration.model.*;
 import com.lexandro.integration.repository.SubscriptionRepository;
 import com.lexandro.integration.service.exception.AccountMissingException;
 import com.lexandro.integration.service.exception.UserExistsException;
+import com.lexandro.integration.service.user.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +15,8 @@ import javax.annotation.Resource;
 public class AppDirectSubscriptionService implements SubscriptionService {
 
     public static final String DUMMY_TOKEN_PATTERN = "token=dummyOrder";
+    @Resource
+    private UserService userService;
     @Resource
     private SubscriptionRepository subscriptionRepository;
 
@@ -51,6 +54,8 @@ public class AppDirectSubscriptionService implements SubscriptionService {
                     .build();
             //
             subscriptionRepository.save(subscription);
+            // adding admin user to the subscription
+            userService.assign(account, subscriptionCreateEvent.getCreator());
             return subscription;
         } else {
             log.error("CreateSubscription - subscription exists with following UUID: {}", subscription);
