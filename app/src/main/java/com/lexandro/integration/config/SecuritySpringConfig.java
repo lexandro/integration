@@ -49,6 +49,7 @@ public class SecuritySpringConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
+        httpSecurity.csrf().disable();
         // Enable endpoints access
         httpSecurity
                 .authorizeRequests()
@@ -58,19 +59,33 @@ public class SecuritySpringConfig extends WebSecurityConfigurerAdapter {
                 .permitAll()
                 .anyRequest()
                 .authenticated();
-        // secure app urls
+//        // secure app urls
         httpSecurity
                 .authorizeRequests()
-                .antMatchers("/imaginarium/**", "/login")
+                .antMatchers("/login/", "/loginpage")
                 .permitAll()
-                .antMatchers("/logout")
+                .antMatchers("/imaginarium/hello", "/logoutpage")
                 .access("hasRole('ROLE_USER')")
                 .and()
                 .openidLogin()
                 .authenticationUserDetailsService(authenticationUserDetailsService)
-                .loginProcessingUrl("/login")
-                .loginPage("/loginpage")
-                .defaultSuccessUrl("/main");
+//                .loginProcessingUrl("/login")
+//                .loginPage("/loginpage")
+                .defaultSuccessUrl("/imaginarium/hello")
+        ;
+
+
+//        http.authorizeRequests()
+//                .antMatchers("/login/", "/applogin")
+//                .permitAll()
+//                .antMatchers("/welcome", "/applogout")
+//                .access("hasRole('USER')")
+//                .and()
+//                .openidLogin().authenticationUserDetailsService(openIDUserDetailsService)
+//                .loginProcessingUrl("/login")
+//                .loginPage("/applogin")
+//                .defaultSuccessUrl("/welcome");
+
 
         //
         httpSecurity.addFilterAfter(oauthProviderProcessingFilter(), OpenIDAuthenticationFilter.class);

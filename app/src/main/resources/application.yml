@@ -10,6 +10,8 @@ appdirect:
     secret: 1mdEQ7wo75yc4YGO
 
 spring:
+  thymeleaf:
+  cache: false
   data:
     mongodb:
       uri: ${MONGO_URI}

@@ -1,5 +1,6 @@
 package com.lexandro.integration.security;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -12,11 +13,13 @@ import org.springframework.stereotype.Service;
 import static java.util.Collections.singletonList;
 
 @Service
+@Slf4j
 public class OpenIdAuthenticationUserDetailsService implements AuthenticationUserDetailsService {
 
     @Override
     public UserDetails loadUserDetails(Authentication authentication) throws UsernameNotFoundException {
+        log.error("Authenticating {}", authentication);
         GrantedAuthority userRole = new SimpleGrantedAuthority("ROLE_USER");
-        return new User((String) authentication.getPrincipal(), "", singletonList(userRole));
+        return new User((String) authentication.getPrincipal(), "password", singletonList(userRole));
     }
 }
