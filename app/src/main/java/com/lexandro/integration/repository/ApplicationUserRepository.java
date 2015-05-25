@@ -7,5 +7,5 @@ public interface ApplicationUserRepository extends MongoRepository<ApplicationUs
 
     ApplicationUser findByAccountIdAndOpenId(String accountId, String openId);
 
-    void deleteByAccountId(String accountIdentifier);
+    String deleteByAccountId(String accountId);
 }
