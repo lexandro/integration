@@ -4,6 +4,8 @@ import com.lexandro.integration.model.*;
 
 public interface SubscriptionService {
 
+    Subscription findByAccountId(String accountId);
+
     Subscription create(SubscriptionCreateEvent subscriptionCreateEvent);
 
     Subscription change(SubscriptionChangeEvent subscriptionChangeEvent);
@@ -11,4 +13,6 @@ public interface SubscriptionService {
     Subscription cancel(SubscriptionCancelEvent subscriptionCancelEvent);
 
     Subscription notice(SubscriptionNoticeEvent subscriptionNoticeEvent);
+
+
 }

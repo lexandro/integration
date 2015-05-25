@@ -10,13 +10,8 @@ public class AppDirectConsumerDetailsService implements ConsumerDetailsService {
 
     @Override
     public ConsumerDetails loadConsumerByConsumerKey(String consumerKey) throws OAuthException {
-        if (consumerKey.equals(consumerKey)) {
-            System.out.println("Jhaaaaaaa");
-        }
         BaseConsumerDetails result = new BaseConsumerDetails();
-
         result.setRequiredToObtainAuthenticatedToken(false);
-
         return result;
     }
 }

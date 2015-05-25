@@ -7,6 +7,7 @@ import com.lexandro.integration.service.exception.UserExistsException;
 import com.lexandro.integration.service.user.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.util.Assert;
 
 import javax.annotation.Resource;
 
@@ -21,7 +22,14 @@ public class AppDirectSubscriptionService implements SubscriptionService {
     private SubscriptionRepository subscriptionRepository;
 
     @Override
+    public Subscription findByAccountId(String accountId) {
+        Assert.hasText(accountId);
+        return subscriptionRepository.findByAccountId(accountId);
+    }
+
+    @Override
     public Subscription create(SubscriptionCreateEvent subscriptionCreateEvent) {
+        Assert.notNull(subscriptionCreateEvent);
         log.debug("Subscriptionservice create with {}", subscriptionCreateEvent);
 
         // Handling dummy calls
@@ -63,6 +71,7 @@ public class AppDirectSubscriptionService implements SubscriptionService {
 
     @Override
     public Subscription change(SubscriptionChangeEvent subscriptionChangeEvent) {
+        Assert.notNull(subscriptionChangeEvent);
         log.debug("Subscriptionservice change with {}", subscriptionChangeEvent);
 
         String accountIdentifier = subscriptionChangeEvent.getPayload().getAccount().getAccountIdentifier();
@@ -85,6 +94,7 @@ public class AppDirectSubscriptionService implements SubscriptionService {
 
     @Override
     public Subscription cancel(SubscriptionCancelEvent subscriptionCancelEvent) {
+        Assert.notNull(subscriptionCancelEvent);
         log.debug("Subscriptionservice cancel with {}", subscriptionCancelEvent);
 
         String accountIdentifier = subscriptionCancelEvent.getPayload().getAccount().getAccountIdentifier();
@@ -106,6 +116,7 @@ public class AppDirectSubscriptionService implements SubscriptionService {
 
     @Override
     public Subscription notice(SubscriptionNoticeEvent subscriptionNoticeEvent) {
+        Assert.notNull(subscriptionNoticeEvent);
         log.debug("Subscriptionservice notice with {}", subscriptionNoticeEvent);
         String accountIdentifier = subscriptionNoticeEvent.getPayload().getAccount().getAccountIdentifier();
         Subscription subscription = subscriptionRepository.findByAccountId(accountIdentifier);

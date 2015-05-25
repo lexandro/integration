@@ -18,7 +18,7 @@ public class OpenIdAuthenticationUserDetailsService implements AuthenticationUse
 
     @Override
     public UserDetails loadUserDetails(Authentication authentication) throws UsernameNotFoundException {
-        log.error("Authenticating {}", authentication);
+        log.info("Authenticating {}", authentication);
         GrantedAuthority userRole = new SimpleGrantedAuthority("ROLE_USER");
         return new User((String) authentication.getPrincipal(), "password", singletonList(userRole));
     }

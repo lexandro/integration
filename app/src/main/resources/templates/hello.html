@@ -2,9 +2,193 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head lang="en">
     <meta charset="UTF-8"/>
-    <title>Hello</title>
+    <title>Welcome in the Imaginarium...</title>
+    <link rel='stylesheet' href='/static/bootstrap/css/bootstrap.css'/>
 </head>
 <body>
-<p th:text="Hello"></p>
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Imaginarium</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
+                <li><a href="https://github.com/lexandro/integration-bootstrap">Delivery Pipeline@Github</a></li>
+                <li><a href="https://github.com/lexandro/integration">Imaginarium@Github</a></li>
+                <li><a href="http://ci.lexandro.com/">Jenkins status</a></li>
+
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="http://www.randomkittengenerator.com/">KITTEN!</a></li>
+                <li><a href="/dologout">Logout</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="jumbotron">
+    <h1>Welcome in the Imaginarium</h1>
+
+    <p>This is simple data listing page from the MongoDB backend</p>
+    <!--<p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a></p>-->
+</div>
+
+<div class="col-md-12>">
+    <div class="col-md-6">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h4 class="panel-title"><span class="glyphicon glyphicon-home"></span> Subscription details</h4>
+            </div>
+            <table class="table table-condensed table-hover table-striped table-bordered">
+                <thead>
+                <tr class="info">
+                    <th>Property</th>
+                    <th>Value</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td><strong>ID:</strong></td>
+                    <td th:text="${subscription.id}"></td>
+                </tr>
+                <tr>
+                    <td><strong>Account ID:</strong></td>
+                    <td th:text="${subscription.accountId}"></td>
+                </tr>
+                <tr>
+                    <td><strong>Marketplace:</strong></td>
+                    <td>Partner: <p th:text="${subscription.marketplace.partner}"></p>
+
+                        BaseUrl: <p th:text="${subscription.marketplace.baseUrl}"></p></td>
+                </tr>
+                <tr>
+                    <td><strong>Account:</strong></td>
+                    <td>
+                        Id: <p th:text="${subscription.account.accountIdentifier}"></p>
+                        status: <p th:text="${subscription.account.status}"></p>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong>Creator:</strong></td>
+                    <td>
+                        Name: <p th:text="${subscription.creator.firstName}+ ' ' + ${subscription.creator.lastName}"></p>
+                        Email: <p th:text="${subscription.creator.email}"></p>
+                        openId: <p th:text="${subscription.creator.openId}"></p>
+
+                    </td>
+                </tr>
+
+                <tr>
+                    <td><strong>Company:</strong></td>
+                    <td>
+                        uuid: <p th:text="${subscription.company.uuid}+ ' ' + ${subscription.creator.lastName}"></p>
+                        country: <p th:text="${subscription.company.country}"></p>
+                        name: <p th:text="${subscription.company.name}"></p>
+                        phoneNumber: <p th:text="${subscription.company.phoneNumber}"></p>
+                        email: <p th:text="${subscription.company.email}"></p>
+                        website: <p th:text="${subscription.company.website}"></p>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h4 class="panel-title"><span class="glyphicon glyphicon-user"></span> User details</h4>
+            </div>
+            <table class="table table-condensed table-hover table-striped table-bordered">
+                <thead>
+                <tr class="success">
+                    <th>Property</th>
+                    <th>Value</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td><strong>User ID:</strong></td>
+                    <td th:text="${user.id}"></td>
+                </tr>
+                <tr>
+                    <td><strong>Account ID:</strong></td>
+                    <td th:text="${user.accountId}"></td>
+                </tr>
+                <tr>
+                    <td><strong>Open ID:</strong></td>
+                    <td th:text="${user.openId}"></td>
+                </tr>
+                <tr>
+                    <td><strong>Name:</strong></td>
+                    <td th:text="${user.firstName +' '+user.lastName}"></td>
+                </tr>
+                <tr>
+                    <td><strong>Email:</strong></td>
+                    <td th:text="${user.userEmail}"></td>
+                </tr>
+                <tr>
+                    <td><strong>Language code:</strong></td>
+                    <td th:text="${user.language}"></td>
+                </tr>
+                <tr>
+                    <td><strong>uuid:</strong></td>
+                    <td th:text="${user.uuid}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<div class="col-md-12>">
+    <div class="col-md-6">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h4 class="panel-title"><span class="glyphicon glyphicon-home"></span> Assigned users</h4>
+            </div>
+            <table class="table table-condensed table-hover table-striped table-bordered">
+                <thead>
+                <tr class="warning">
+                    <th>Id</th>
+                    <th>openId</th>
+                    <th>Name</th>
+                    <th>email</th>
+                    <th>language</th>
+                    <th>attributes</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="appUser : ${applicationUserList}">
+                    <td th:text="${appUser.id}"></td>
+                    <td th:text="${#strings.abbreviate(appUser.openId,40)}"></td>
+                    <td th:text="${appUser.firstName + ' ' + appUser.lastName}"></td>
+                    <td th:text="${appUser.userEmail}"></td>
+                    <td th:text="${appUser.language}"></td>
+                    <td>
+                <tr th:each="attribute : ${appUser.attributes}">
+                    <td th:text="${attribute.key}"></td>
+                    <td th:text="${attribute.value}"></td>
+                </tr>
+
+                </td>
+                </tr>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<script src="/static/jquery/jquery.js"></script>
+<script src="/static/bootstrap/js/bootstrap.js"></script>
 </body>
 </html>

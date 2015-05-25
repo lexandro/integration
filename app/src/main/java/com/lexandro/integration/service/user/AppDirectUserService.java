@@ -8,13 +8,14 @@ import com.lexandro.integration.service.exception.UserExistsException;
 import com.lexandro.integration.service.exception.UserMissingException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.util.Assert;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @Service
 @Slf4j
 public class AppDirectUserService implements UserService {
-
 
     @Resource
     private SubscriptionRepository subscriptionRepository;
@@ -22,9 +23,21 @@ public class AppDirectUserService implements UserService {
     @Resource
     private ApplicationUserRepository applicationUserRepository;
 
+    @Override
+    public ApplicationUser findByOpenId(String openId) {
+        Assert.hasText(openId);
+        return applicationUserRepository.findByOpenId(openId);
+    }
+
+    @Override
+    public List<ApplicationUser> findByAccountId(String findByAccountId) {
+        Assert.hasText(findByAccountId);
+        return applicationUserRepository.findByAccountId(findByAccountId);
+    }
 
     @Override
     public ApplicationUser assign(AssignUserEvent userEvent) {
+        Assert.notNull(userEvent);
         log.info("Assign called {}", userEvent);
         //
         Payload payload = userEvent.getPayload();
@@ -33,6 +46,8 @@ public class AppDirectUserService implements UserService {
 
     @Override
     public ApplicationUser assign(Account account, User user) {
+        Assert.notNull(account);
+        Assert.notNull(user);
         String accountIdentifier = account.getAccountIdentifier();
         checkSubscription(accountIdentifier);
         //
@@ -61,6 +76,7 @@ public class AppDirectUserService implements UserService {
 
     @Override
     public ApplicationUser unAssign(UnAssignUserEvent userEvent) {
+        Assert.notNull(userEvent);
         log.info("unAssign called {}", userEvent);
         //
         Payload payload = userEvent.getPayload();
@@ -80,6 +96,7 @@ public class AppDirectUserService implements UserService {
 
     @Override
     public void unAssignAll(String accountIdentifier) {
+        Assert.hasText(accountIdentifier);
         log.info("unAssign all users for {}", accountIdentifier);
         //
         applicationUserRepository.deleteByAccountId(accountIdentifier);

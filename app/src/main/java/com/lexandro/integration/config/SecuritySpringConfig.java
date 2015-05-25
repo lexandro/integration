@@ -75,18 +75,6 @@ public class SecuritySpringConfig extends WebSecurityConfigurerAdapter {
         ;
 
 
-//        http.authorizeRequests()
-//                .antMatchers("/login/", "/applogin")
-//                .permitAll()
-//                .antMatchers("/welcome", "/applogout")
-//                .access("hasRole('USER')")
-//                .and()
-//                .openidLogin().authenticationUserDetailsService(openIDUserDetailsService)
-//                .loginProcessingUrl("/login")
-//                .loginPage("/applogin")
-//                .defaultSuccessUrl("/welcome");
-
-
         //
         httpSecurity.addFilterAfter(oauthProviderProcessingFilter(), OpenIDAuthenticationFilter.class);
     }
