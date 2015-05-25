@@ -2,18 +2,16 @@ package com.lexandro.integration.service.event;
 
 import com.lexandro.integration.model.ErrorCode;
 import com.lexandro.integration.model.EventResponse;
+import com.lexandro.integration.repository.EventLoggingRepository;
 import com.lexandro.integration.service.event.strategy.EventProcessorStrategy;
 import com.lexandro.integration.service.exception.AccountMissingException;
 import com.lexandro.integration.service.exception.UserExistsException;
 import com.lexandro.integration.service.exception.UserMissingException;
-import com.lexandro.integration.service.subscription.SubscriptionService;
-import com.lexandro.integration.service.xml.XmlService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import javax.xml.bind.JAXBException;
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -21,22 +19,20 @@ import java.util.Optional;
 public class StrategyEventRouter implements EventRouter {
 
     @Resource
+    private EventLoggingRepository eventLoggingRepository;
+
+    @Resource
     private EventService eventService;
 
     @Resource
     private EventProcessorStrategyProvider eventProcessorStrategyProvider;
 
-    @Resource
-    private XmlService xmlService;
-
-    @Resource
-    private SubscriptionService subscriptionService;
-
-    private List<EventProcessorStrategy> strategyList;
-
     @Override
     public EventResponse routeEvent(String eventUrl) {
         String rawEvent = eventService.get(eventUrl);
+        // Add logging
+        eventLoggingRepository.save(rawEvent);
+        //
         EventResponse result = new EventResponse();
         result.setSuccess(true);
         //
