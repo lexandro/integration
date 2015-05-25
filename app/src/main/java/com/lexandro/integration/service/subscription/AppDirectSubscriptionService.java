@@ -36,8 +36,6 @@ public class AppDirectSubscriptionService implements SubscriptionService {
 
         Subscription subscription = subscriptionRepository.findByAccountId(accountIdCandidate);
         //
-        // FIXME temp avoidance of dup user error! SHOULD REMOVED!
-        subscription = null;
         if (subscription == null) {
             // Setting account active
             Account account = new Account();
