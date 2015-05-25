@@ -16,6 +16,9 @@ import java.security.Principal;
 
 import static com.lexandro.integration.api.v1.ApiVersion.VERSION;
 
+/*
+  This controller is responsible only for the authentication related stuff. Calculates logout based on the logged in user's data (market url...)
+ */
 @Controller
 @RequestMapping(value = AuthenticationController.BASE_PATH)
 @Api(value = "Login-" + VERSION, description = "Basic API version for Logging in into Imaginarium")
@@ -40,14 +43,17 @@ public class AuthenticationController {
     @RequestMapping(value = "/dologout", method = RequestMethod.GET)
     public String doLogout(Principal principal) {
         Assert.notNull(principal);
-        ApplicationUser applicationUser = userService.findByOpenId(principal.getName());
-        Subscription subscription = subscriptionService.findByAccountId(applicationUser.getAccountId());
         String logoutUrl = "login";
-        // we can redirect to app market logout url only when the user and the subscription is valid
-        if (applicationUser != null && subscription != null) {
-            logoutUrl = "redirect:" + subscription.getMarketplace().getBaseUrl() + "/applogout?openid=" + principal.getName();
-            //
-            log.info("Logging out with: {}", logoutUrl);
+        //
+        ApplicationUser applicationUser = userService.findByOpenId(principal.getName());
+        if (applicationUser != null) {
+            Subscription subscription = subscriptionService.findByAccountId(applicationUser.getAccountId());
+            // we can redirect to app market logout url only when the user and the subscription is valid
+            if (subscription != null) {
+                logoutUrl = "redirect:" + subscription.getMarketplace().getBaseUrl() + "/applogout?openid=" + principal.getName();
+                //
+                log.info("Logging out with: {}", logoutUrl);
+            }
         }
         //
         return logoutUrl;

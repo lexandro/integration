@@ -15,11 +15,15 @@ import javax.annotation.Resource;
 import java.security.Principal;
 import java.util.List;
 
+/*
+  Simpla visualisation backend for the hello page to show some stored data.
+ */
 @Controller
 @RequestMapping(value = ImaginariumController.BASE_PATH)
 @Slf4j
 public class ImaginariumController {
 
+    // no versioning added by intention
     protected static final String BASE_PATH = "/imaginarium/";
 
     @Resource
@@ -32,6 +36,7 @@ public class ImaginariumController {
     public String sayHello(Principal principal, Model model) {
         Assert.notNull(principal);
         ApplicationUser loggedInUser = userService.findByOpenId(principal.getName());
+        Assert.notNull(loggedInUser);
         String accountId = loggedInUser.getAccountId();
         //
         Subscription subscription = subscriptionService.findByAccountId(accountId);

@@ -57,6 +57,18 @@
                     <td th:text="${subscription.id}"></td>
                 </tr>
                 <tr>
+                    <td><strong>Subscription type:</strong></td>
+
+                    <td>
+                        Edition: <p th:text="${subscription.order.editionCode}"></p>
+                        Duration <p th:text="${subscription.order.pricingDuration}"></p>
+                <tr th:each="item : ${subscription.order.items}">
+                    <td th:text="${item.unit}"></td>
+                    <td th:text="${item.quantity}"></td>
+                </tr>
+                </td>
+                </tr>
+                <tr>
                     <td><strong>Account ID:</strong></td>
                     <td th:text="${subscription.accountId}"></td>
                 </tr>

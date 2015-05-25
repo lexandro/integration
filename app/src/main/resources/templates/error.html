@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+    <meta charset="UTF-8"/>
+    <title>Welcome in the Imaginarium...</title>
+    <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css'/>
+
+</head>
+<body>
+<h1>Ooops something happened. Please try to login via the <a href="https://www.appdirect.com">AppDirect page</a></h1>
+
+<h1>
+    <small th:text="${message}"></small>
+</h1>
+
+
+<form action="https://www.appdirect.com">
+    <input class="btn btn-primary" type="submit" value="Go to the AppDirect page"/>
+</form>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+</body>
+</html>
