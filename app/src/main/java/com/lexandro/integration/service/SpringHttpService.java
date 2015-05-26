@@ -8,6 +8,7 @@ import org.apache.http.client.utils.HttpClientUtils;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.util.EntityUtils;
 import org.springframework.stereotype.Service;
+import org.springframework.util.Assert;
 
 import java.io.IOException;
 
@@ -19,6 +20,7 @@ public class SpringHttpService implements HttpService {
 
     @Override
     public String get(String url) throws IOException {
+        Assert.hasText(url);
         HttpClient client = null;
         HttpGet request;
         HttpResponse response = null;
