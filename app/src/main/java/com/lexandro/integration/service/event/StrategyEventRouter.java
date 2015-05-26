@@ -32,7 +32,7 @@ public class StrategyEventRouter implements EventRouter {
         EventResponse result = new EventResponse();
         result.setSuccess(true);
         //
-        String rawEvent = null;
+        String rawEvent;
         try {
             rawEvent = eventService.get(eventUrl);
             storeEvent(eventUrl, rawEvent);
