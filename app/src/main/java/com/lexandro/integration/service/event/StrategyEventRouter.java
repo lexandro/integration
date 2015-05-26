@@ -47,11 +47,13 @@ public class StrategyEventRouter implements EventRouter {
             result.setErrorCode(ErrorCode.UNKNOWN_ERROR);
             return result;
         }
-        //
-        Assert.hasText(rawEvent);
-        //
-        Optional<EventProcessorStrategy> eventProcessorStrategy = eventProcessorStrategyProvider.get(rawEvent);
+
         try {
+            //
+            Assert.hasText(rawEvent);
+            //
+            Optional<EventProcessorStrategy> eventProcessorStrategy = eventProcessorStrategyProvider.get(rawEvent);
+            //
             if (eventProcessorStrategy.isPresent()) {
                 result = eventProcessorStrategy.get().process(rawEvent);
             } else {
@@ -59,7 +61,7 @@ public class StrategyEventRouter implements EventRouter {
                 result.setMessage("Received unknown event");
                 result.setErrorCode(ErrorCode.INVALID_RESPONSE);
             }
-        } catch (JAXBException e) {
+        } catch (JAXBException | IllegalArgumentException e) {
             log.error("Error unmarshalling XML event from eventUrl {} error: {}", eventUrl, e);
             result.setSuccess(false);
             result.setMessage("Error reading event data");
