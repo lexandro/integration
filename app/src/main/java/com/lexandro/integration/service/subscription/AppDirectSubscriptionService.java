@@ -84,8 +84,8 @@ public class AppDirectSubscriptionService implements SubscriptionService {
             subscription.setOrder(subscriptionChangeEvent.getPayload().getOrder());
             subscription.setAccount(subscriptionChangeEvent.getPayload().getAccount());
             //
-            subscriptionRepository.save(subscription);
-            return subscription;
+
+            return subscriptionRepository.save(subscription);
         } else {
             log.error("ChangeSubscription - account missing: {}", subscriptionChangeEvent.getCreator());
             throw new AccountMissingException(accountIdentifier);
@@ -101,17 +101,15 @@ public class AppDirectSubscriptionService implements SubscriptionService {
         Subscription subscription = subscriptionRepository.findByAccountId(accountIdentifier);
         //
         if (subscription != null) {
-            // purge users first
+            // purge users first, not transactional I know...
             userService.unAssignAll(accountIdentifier);
             // Picked delete by intention to it keep simple. Other option to "deactivate" the account
             subscriptionRepository.delete(subscription.getId());
-
             return subscription;
         } else {
             log.error("CancelSubscription - account missing: {}", subscriptionCancelEvent.getCreator());
             throw new AccountMissingException(accountIdentifier);
         }
-
     }
 
     @Override
