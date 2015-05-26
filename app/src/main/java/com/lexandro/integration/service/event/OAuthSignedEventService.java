@@ -11,6 +11,7 @@ import oauth.signpost.exception.OAuthCommunicationException;
 import oauth.signpost.exception.OAuthExpectationFailedException;
 import oauth.signpost.exception.OAuthMessageSignerException;
 import org.springframework.stereotype.Service;
+import org.springframework.util.Assert;
 
 import javax.annotation.Resource;
 import javax.xml.bind.JAXBException;
@@ -51,11 +52,14 @@ public class OAuthSignedEventService implements EventService {
     public String get(String url) {
         log.debug("OAuthSignedEventService get raw data with {}", url);
         try {
+            Assert.hasText(url);
             String signedUrl = oAuthConsumer.sign(url);
             log.debug("Signed URL {}", signedUrl);
             return httpService.get(signedUrl);
         } catch (OAuthExpectationFailedException | OAuthCommunicationException | OAuthMessageSignerException | IOException e) {
             throw new EventReadingException("Error reading event from: " + url, e);
+        } catch (IllegalArgumentException e) {
+            throw new EventReadingException("Url is null or empty", e);
         }
     }
 }
