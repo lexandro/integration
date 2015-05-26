@@ -1,7 +1,7 @@
 <configuration>
 
     <!-- enable JMX endpoint for Admin UI -->
-    <jmxConfigurator />
+    <jmxConfigurator/>
 
     <!-- log to console by default -->
     <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
@@ -10,7 +10,7 @@
         </layout>
     </appender>
     <root level="WARN">
-        <appender-ref ref="console" />
+        <appender-ref ref="console"/>
     </root>
 
 
