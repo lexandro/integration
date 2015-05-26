@@ -5,6 +5,10 @@ import org.springframework.security.oauth.provider.BaseConsumerDetails;
 import org.springframework.security.oauth.provider.ConsumerDetails;
 import org.springframework.security.oauth.provider.ConsumerDetailsService;
 
+
+/*
+    Dummy class to enable clients
+ */
 public class AppDirectConsumerDetailsService implements ConsumerDetailsService {
 
 
