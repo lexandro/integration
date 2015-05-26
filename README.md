@@ -19,11 +19,11 @@ Building the Docker image
     docker build -t <your repo>/imaginarium .
 ```
      
-## Deploy/run
+## Deploy
 The maven packaged app jar could be started directly, but also available as Docker image to run it without any preparation
 
 ### Preparation
-Java app is available on localhost:8080 and the passed **java.security.egd** settings is mandatory for some virtualized environment (e.g. Digital Ocean), otherwise the startup takes 30 mins o.O.
+Java app is available on localhost:8080 and the passed **java.security.egd** settings are mandatory for some virtualized environment (e.g. Digital Ocean), otherwise the startup takes 30 mins o.O.
 
 To run the app you could configure your MongoDB access or use the following I generated for reviewers (that differs from my dev instance):
 ```
@@ -33,7 +33,7 @@ To run the app you could configure your MongoDB access or use the following I ge
 ### Credentials 
 The consumer key and secret is already provided in <proj root>/app/src/main/resources/application.yml 
 
-## Delivery pipeline
+### Delivery pipeline
 The app has a fully automated build pipeline on: http://ci.lexandro.com/
 
 Pipeline screenshot:
@@ -41,7 +41,7 @@ Pipeline screenshot:
 ![alt tag](https://raw.githubusercontent.com/lexandro/integration/master/docs/delivery_pipeline.png)
 
 
-### Run
+## Run
 ```
     java -DMONGO_URI=<mongodb connection string> -Djava.security.egd=file:/dev/urandom -jar imaginarium.jar
 ```
