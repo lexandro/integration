@@ -26,12 +26,10 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.security.web.util.matcher.RequestMatcher;
 
 import javax.annotation.Resource;
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import static java.util.Collections.singletonList;
 
 
 @Configuration
@@ -68,11 +66,22 @@ public class SecuritySpringConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .openidLogin()
                 .authenticationUserDetailsService(authenticationUserDetailsService)
-
 //                .loginProcessingUrl("/login")
 //                .loginPage("/loginpage")
                 .defaultSuccessUrl("/imaginarium/hello")
         ;
+
+
+//        http.authorizeRequests()
+//                .antMatchers("/login/", "/applogin")
+//                .permitAll()
+//                .antMatchers("/welcome", "/applogout")
+//                .access("hasRole('USER')")
+//                .and()
+//                .openidLogin().authenticationUserDetailsService(openIDUserDetailsService)
+//                .loginProcessingUrl("/login")
+//                .loginPage("/applogin")
+//                .defaultSuccessUrl("/welcome");
 
 
         //
@@ -82,13 +91,13 @@ public class SecuritySpringConfig extends WebSecurityConfigurerAdapter {
 
     @Bean
     OAuthProviderProcessingFilter oauthProviderProcessingFilter() {
-        List<RequestMatcher> requestMatchers = Arrays.asList(
-                new AntPathRequestMatcher("/subscription/**"),
-                new AntPathRequestMatcher("/users/**")
-        );
+        List<RequestMatcher> requestMatchers = new ArrayList<>();
+        requestMatchers.add(new AntPathRequestMatcher(SubscriptionController.BASE_PATH + "**"));
+        requestMatchers.add(new AntPathRequestMatcher(UserController.BASE_PATH + "/**"));
         //
         ProtectedResourceProcessingFilter filter = new ApplicationOAuthProviderProcessingFilter(requestMatchers);
         //
+        filter.setIgnoreMissingCredentials(false);
         filter.setConsumerDetailsService(consumerDetailsService());
         filter.setTokenServices(providerTokenServices());
         //
