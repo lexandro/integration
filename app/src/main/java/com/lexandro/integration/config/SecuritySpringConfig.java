@@ -26,6 +26,7 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.security.web.util.matcher.RequestMatcher;
 
 import javax.annotation.Resource;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -69,8 +70,8 @@ public class SecuritySpringConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .openidLogin()
                 .authenticationUserDetailsService(authenticationUserDetailsService)
-//                .loginProcessingUrl("/login")
-//                .loginPage("/loginpage")
+                .loginProcessingUrl("/login")
+                .loginPage("/loginpage")
                 .defaultSuccessUrl("/imaginarium/hello")
         ;
 
@@ -82,7 +83,10 @@ public class SecuritySpringConfig extends WebSecurityConfigurerAdapter {
 
     @Bean
     OAuthProviderProcessingFilter oauthProviderProcessingFilter() {
-        List<RequestMatcher> requestMatchers = singletonList(new AntPathRequestMatcher("/subscription/**"));
+        List<RequestMatcher> requestMatchers = Arrays.asList(
+                new AntPathRequestMatcher("/subscription/**"),
+                new AntPathRequestMatcher("/users/**")
+        );
         //
         ProtectedResourceProcessingFilter filter = new ApplicationOAuthProviderProcessingFilter(requestMatchers);
         //
