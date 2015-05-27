@@ -39,7 +39,6 @@ public class SubscriptionController {
     @RequestMapping(value = "/create", method = GET)
     public ResponseEntity<EventResponse> create(@RequestParam(value = EVENT_URL_PARAM_VALUE) String eventUrl, @RequestParam(value = TOKEN_PARAM_VALUE) String token, @AuthenticationPrincipal ConsumerAuthentication authentication) {
         log.info("Called create event URL: {}, auth: {}, token: {}", eventUrl, authentication, token);
-        Assert.notNull(authentication);
         //
         EventResponse createResponse = eventRouter.routeEvent(eventUrl);
         //
@@ -49,7 +48,6 @@ public class SubscriptionController {
     @RequestMapping(value = "/change", method = GET)
     public EventResponse change(@RequestParam(value = EVENT_URL_PARAM_VALUE) String eventUrl, @RequestParam(value = TOKEN_PARAM_VALUE) String token, @AuthenticationPrincipal ConsumerAuthentication authentication) {
         log.info("Called change event URL: {}, auth: {}, token: {}", eventUrl, authentication, token);
-        Assert.notNull(authentication);
         //
         EventResponse changeResponse = eventRouter.routeEvent(eventUrl);
         //
@@ -59,7 +57,6 @@ public class SubscriptionController {
     @RequestMapping(value = "/cancel", method = GET)
     public ResponseEntity cancel(@RequestParam(value = EVENT_URL_PARAM_VALUE) String eventUrl, @RequestParam(value = TOKEN_PARAM_VALUE) String token, @AuthenticationPrincipal ConsumerAuthentication authentication) {
         log.info("Called cancel event URL: {}, auth: {}, token: {}", eventUrl, authentication, token);
-        Assert.notNull(authentication);
         //
         EventResponse cancelResponse = eventRouter.routeEvent(eventUrl);
         //
@@ -69,7 +66,6 @@ public class SubscriptionController {
     @RequestMapping(value = "/notice", method = GET)
     public ResponseEntity notice(@RequestParam(value = EVENT_URL_PARAM_VALUE) String eventUrl, @RequestParam(value = TOKEN_PARAM_VALUE) String token, @AuthenticationPrincipal ConsumerAuthentication authentication) {
         log.info("Called notice event URL: {}, auth: {}, token: {}", eventUrl, authentication, token);
-        Assert.notNull(authentication);
         //
         EventResponse statusResponse = eventRouter.routeEvent(eventUrl);
         //

@@ -39,7 +39,6 @@ public class UserController {
     @RequestMapping(value = "/assign", method = GET)
     public ResponseEntity<EventResponse> create(@RequestParam(value = EVENT_URL_PARAM_VALUE) String eventUrl, @RequestParam(value = TOKEN_PARAM_VALUE) String token, @AuthenticationPrincipal ConsumerAuthentication authentication) {
         log.info("Called user assign event URL: {}, auth: {}, token: {}", eventUrl, authentication, token);
-        Assert.notNull(authentication);
         //
         EventResponse assignResponse = eventRouter.routeEvent(eventUrl);
         //
@@ -49,7 +48,6 @@ public class UserController {
     @RequestMapping(value = "/unassign", method = GET)
     public ResponseEntity<EventResponse> unassign(@RequestParam(value = EVENT_URL_PARAM_VALUE) String eventUrl, @RequestParam(value = TOKEN_PARAM_VALUE) String token, @AuthenticationPrincipal ConsumerAuthentication authentication) {
         log.info("Called user unassign event URL: {}, auth: {}, token: {}", eventUrl, authentication, token);
-        Assert.notNull(authentication);
         //
         EventResponse unassignResponse = eventRouter.routeEvent(eventUrl);
         //
