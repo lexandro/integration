@@ -54,9 +54,7 @@ public class SecuritySpringConfig extends WebSecurityConfigurerAdapter {
         // Enable endpoints access
         httpSecurity
                 .authorizeRequests()
-                .antMatchers(SubscriptionController.BASE_PATH + "**")
-                .permitAll()
-                .antMatchers(UserController.BASE_PATH + "**")
+                .antMatchers(SubscriptionController.BASE_PATH + "**", UserController.BASE_PATH + "**")
                 .permitAll()
                 .anyRequest()
                 .authenticated();
@@ -70,8 +68,9 @@ public class SecuritySpringConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .openidLogin()
                 .authenticationUserDetailsService(authenticationUserDetailsService)
-                .loginProcessingUrl("/login")
-                .loginPage("/loginpage")
+
+//                .loginProcessingUrl("/login")
+//                .loginPage("/loginpage")
                 .defaultSuccessUrl("/imaginarium/hello")
         ;
 
