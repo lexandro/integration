@@ -34,7 +34,7 @@ To run the app you could configure your MongoDB access or use the following I ge
 The consumer key and secret is already provided in <proj root>/app/src/main/resources/application.yml 
 
 ### Delivery pipeline
-The app has a fully automated build pipeline on: http://ci.lexandro.com/
+The app has a fully automated build pipeline on: /not available anymore/
 
 Pipeline screenshot:
 
