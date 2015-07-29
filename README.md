@@ -1,8 +1,8 @@
-# AppDirect integration PoC
+# integration PoC
 
 ## Intro
 
-Sample app to demonstrate AppDirect integration by Robert Stern based on Java 8, MongoDB and Spring Boot.
+Sample app to demonstrate some integration based on Java 8, MongoDB and Spring Boot.
 
 
 ## How to build
@@ -61,7 +61,7 @@ could be found here:
 
 https://github.com/lexandro/integration-bootstrap
 
-## Integration endpoints
+## Integration endpoints /not available anymore!!!/
 
 Subscription:
 
